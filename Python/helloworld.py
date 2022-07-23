@@ -4,4 +4,4 @@ n=256
 n=[int(i) for i in n]
 '''
 n=list(map(int,list(str(n))))
-print(n[-1])
+print(n[-1::-1])

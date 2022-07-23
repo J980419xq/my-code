@@ -63,12 +63,17 @@ int main()
 	/*for(map<string,int>::iterator iter=jxq.begin();iter!=jxq.end();++iter){
 		cout<<iter->first<<" "<<iter->second<<endl;
 	}                         插入有序*/ 
-	cout<<jxq.erase("3");                 //删除成功返回1，不成功返回0
+	//cout<<jxq.erase("3");                 //删除成功返回1，不成功返回0
 	/*int n=0;
 	n|=1<<('b'-'a');
 	n|=1<<('c'-'a');
 	cout<<(1<<('c'-'a'))<<endl;*/
-	int b[5] = {1, 3, 5, 7, 9};
+	int b[5] = {1, 3, 6, 7, 2};
+	unordered_set<int> unset(b,b+5);
+	/*for(int x:unset){
+		cout<<x<<" ";
+	}*/
+	cout<<endl;
 	vector<vector<int>> d;
 	d.push_back({1,2});
 	d.push_back({1,3});
