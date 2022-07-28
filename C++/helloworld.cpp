@@ -95,7 +95,9 @@ int main()
 	vector<string> strArray(str, str + 10);
 	//stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
 	sort(d.begin(),d.end(),compare);
-
+	for(auto& com:d){
+		cout<<com[1]<<" ";
+	}
 	/*int m = [](int x) { return [](int y) { return y * 2; }(x)+6; }(5);   //lambda表达式
     std::cout << "m:" << m << std::endl;            //输出m:16
 	std::cout << "n:" << [](int x, int y) { return x + y; }(5, 4) << std::endl;            //输出n:9*/
