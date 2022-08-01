@@ -9,3 +9,4 @@ arr=[3,2,4,5,3]
 for i,v in enumerate(sorted(set(arr)),1):
     print(i,v)
 print(arr)
+parent=list(range(4))    #[0,1,2,3]
