@@ -10,3 +10,6 @@ for i,v in enumerate(sorted(set(arr)),1):
     print(i,v)
 print(arr)
 parent=list(range(4))    #[0,1,2,3]
+map={"jxq":1,"yyh":2}
+lst = list( map.items() )
+print(lst)
