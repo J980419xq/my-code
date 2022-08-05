@@ -75,6 +75,7 @@ def container(loop,start_ip,count,image):
         nextIP += 1
         index+=1
         name="h"+str(index)
+        #cmd="docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eth0 mynet"
         cmd="docker create -it --privileged --cap-add=NET_ADMIN --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --name {} --net=testnet --ip={} {}".format(name,_ip,image)
         ssh=ASsh(loop,host="localhost")
         nameToSsh[name]=ssh
