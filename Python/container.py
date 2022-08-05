@@ -24,6 +24,7 @@ def container(start_ip,count):
     ip=( 0xffffffff >> 8 ) & ipBasenum
     nextIP = ip if ip > 0 else 1
     index=0
+    #cmd="docker network create -d macvlan --subnet=10.100.0.0/8 --gateway=10.100.0.1 -o parent=eth0 mynet"
     for _ in range(count):
         _ip = "{}".format(ipAdd( nextIP, ipBaseNum=ipBasenum))
         nextIP += 1
