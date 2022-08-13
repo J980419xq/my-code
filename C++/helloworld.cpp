@@ -93,6 +93,8 @@ int main()
 	vector<string> ans(n, "0");
 	vector<vector<int>> f(3, vector<int>(3, 2));
 	//cout<<(*(*f.begin()).begin());
+	string str1="asD";
+	transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
 	string str[] = {"hello", "wrd", "this", "find", "gank", "pink", "that", "when", "how", "cpp"};
 	vector<string> strArray(str, str + 10);
 	//stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
