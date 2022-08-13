@@ -12,6 +12,7 @@ iota(ans.begin(), ans.end(), 0);  //将ans赋值为0开始的值
 swap(s[i],s[j]);
 accumulate(arr.begin(),arr.end(),0);    //求和(string也可以,初始元素为“”s)  
 count(vec.begin(),vec.end(),8);         //count(a,a+n,7)
+count_if(vec.begin(),vec.end(),[](int a){return a>10;});
 sort(arr,arr+n,greater<int>());//compare默认为less升序,stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
 bool compare(stu a,stu b){     //自定义compare，常用lambda表达式如sort(costs.begin(), costs.end(), [](vector<int> &a, vector<int> &b){return a[0] - a[1] < b[0] - b[1];}); //差值排序    
 	if(a.d+a.c!=b.d+b.c) return a.d+a.c>b.d+b.c;
@@ -104,4 +105,13 @@ printf("%.2f ",A4);//保留两位有效数字
 printf("%04d - %04d = %04d\n", max, min,n);//4位整数输出;printf中双引号内除了输出控制符和转义字符\n外，所有其余的普通字符全部都原样输出
 printf("%.1f%% %.1f%%\n", 1.0*count1/N*100, 1.0*count2/N*100);//输出百分数两个百分号
 sscanf(log.c_str(), "%d:%[^:]:%d", &idx, type, &timestamp);//{"0:start:0","0:end:2"}
+```
+
+## 类和结构
+```c++
+struct student
+{
+    string name;
+    int score;
+};
 ```

@@ -83,6 +83,7 @@ int main()
 	auto res = lower_bound(b, b + 5, 3) - b;
 	unordered_map<char,int> htable;
 	vector<int> score(b, b + 5);
+	int num=count_if(score.begin(),score.end(),[](int a){return a>4;});
 	unordered_map<int, int> mapp;    //默认值为0
 	n = score.size();
 	for (int i = 0; i < n; ++i)
