@@ -11,6 +11,7 @@ reverse(s,s+9);     //参数一是翻转的第一项，参数二是翻转后的�
 iota(ans.begin(), ans.end(), 0);  //将ans赋值为0开始的值
 swap(s[i],s[j]);
 accumulate(arr.begin(),arr.end(),0);    //求和(string也可以,初始元素为“”s)  
+count(vec.begin(),vec.end(),8);         //count(a,a+n,7)
 sort(arr,arr+n,greater<int>());//compare默认为less升序,stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
 bool compare(stu a,stu b){     //自定义compare，常用lambda表达式如sort(costs.begin(), costs.end(), [](vector<int> &a, vector<int> &b){return a[0] - a[1] < b[0] - b[1];}); //差值排序    
 	if(a.d+a.c!=b.d+b.c) return a.d+a.c>b.d+b.c;
