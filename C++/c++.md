@@ -47,9 +47,9 @@ function body：函数体*/
 sort(words.begin(),words.end(),[](const string &a,const string &b){return a.size()==b.size()?a>b:a.size()<b.size();});
 function<void(TreeNode*,int)> dfs = [&](TreeNode* node,int cur) {... dfs(node->left,cur+1);};   //lambda递归型
 all_of(iter1,iter2,func)    //迭代范围内的每个元素满足指定属性返回true,常与lambda表达式连用
-transform(first1, last1, result, op)//将op应用于[first1, last1)范围内的每个元素，并将每个操作返回的值存储在以result开头的范围内。给定的op将被连续调用last1-first1次。op可以是函数指针或函数对象或lambda表达式
+transform(first1, last1, result, op)//需返回值并将每个操作返回的值存储在以result开头的范围内，op可以是函数指针或函数对象或lambda表达式
 transform(first1, last1, first2, result, op) //使用[first1, last1)范围内的每个元素作为第一个参数调用op,并以first2开头的范围内的每个元素作为第二个参数调用op
-
+for_each(first1,last1,op)                    //速度快但要求一个序列，将op应用于[first1, last1)范围内的每个元素，无需返回值
 ```
 
 ## 数组
