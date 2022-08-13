@@ -49,13 +49,16 @@ int main()
 	qwe.insert(1);
 	qwe.erase(qwe.begin());     //插入字符后有序，删除的是1
 	priority_queue<int, vector<int>, less<int>> q;    //默认，大顶堆
-	priority_queue<pair1, vector<pair1>, greater<pair1>> pq1;
+	priority_queue<pair1, vector<pair1>, less<pair1>> pq1;
 	priority_queue<pair2, vector<pair2>, greater<pair2>> pq2;
 	q.emplace(1); //q.push(2);
 	pq1.push({0, 1});
+	pq1.push({0, 2});
+	pq1.push({0, 3});
 	pq2.push({{0}, {1, 2}});
-	
 	map<string,int> jxq;
+	pair1 power={0,4};
+	pq1.push(move(power));
 	jxq.insert(make_pair("2",1));
 	jxq.insert(make_pair("1",2));
 	jxq.insert(make_pair("3",3));
@@ -73,7 +76,6 @@ int main()
 	/*for(int x:unset){
 		cout<<x<<" ";
 	}*/
-	cout<<endl;
 	vector<vector<int>> d;
 	d.push_back({1,2});
 	d.push_back({1,3});
@@ -87,10 +89,10 @@ int main()
 	{
 		mapp[score[i]] = i;
 	}
-	
 	vector<int> c(3, 5);
 	vector<string> ans(n, "0");
 	vector<vector<int>> f(3, vector<int>(3, 2));
+	//cout<<(*(*f.begin()).begin());
 	string str[] = {"hello", "wrd", "this", "find", "gank", "pink", "that", "when", "how", "cpp"};
 	vector<string> strArray(str, str + 10);
 	//stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
@@ -101,11 +103,5 @@ int main()
 	/*int m = [](int x) { return [](int y) { return y * 2; }(x)+6; }(5);   //lambda表达式
     std::cout << "m:" << m << std::endl;            //输出m:16
 	std::cout << "n:" << [](int x, int y) { return x + y; }(5, 4) << std::endl;            //输出n:9*/
-    string s="313";
-	
-	string word;
-	for(auto &c:s){
-		word.append(4,'.');
-	}
 	return 0;
 }
