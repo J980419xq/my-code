@@ -43,6 +43,8 @@ int main()
 	function<int(int)> func = [&](int n) {
 		return n == 1 ? 1 : n + func(n - 1);
 	};
+	int l=-1%4;
+	cout<<l;
 	int n=7;
 	set<int> qwe;
 	qwe.insert(2);

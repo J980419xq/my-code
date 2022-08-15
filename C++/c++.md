@@ -10,7 +10,8 @@ move(obj);   //将一个对象转换为另一个对象，左值引用转换为�
 reverse(s,s+9);     //参数一是翻转的第一项，参数二是翻转后的一项,reverse(s.begin(),s.begin()+9)
 iota(ans.begin(), ans.end(), 0);  //将ans赋值为0开始的值
 swap(s[i],s[j]);
-accumulate(arr.begin(),arr.end(),0);    //求和(string也可以,初始元素为“”s)  
+accumulate(arr.begin(),arr.end(),0);    //求和(string也可以,初始元素为“”s或者string{})  
+accumulate(arr.begin(),arr.end(),0,op);  //op是二元函数对象，常为lambda表达式，参1总数，参2arr元素
 count(vec.begin(),vec.end(),8);         //count(a,a+n,7)
 count_if(vec.begin(),vec.end(),[](int a){return a>10;});
 sort(arr,arr+n,greater<int>());//compare默认为less升序,stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
@@ -34,7 +35,7 @@ bool isPrime(int n){                              //判断素数
  }
  return yes;
 }
-int year;year % 400 == 0 || (year % 4 == 0 && year % 100 != 0 )//判断闰年
+int year{2008};year % 400 == 0 || (year % 4 == 0 && year % 100 != 0 )//判断闰年
 ListNode* dummy = new ListNode(-1);TreeNode* root = new TreeNode(0);
 /*静态成员函数指针=普通函数指针!=成员函数指针*/
 lambda表达式 [capture list](params list) |mutable| |exception| |-> return type| { function body };
@@ -113,5 +114,16 @@ struct student
 {
     string name;
     int score;
+};
+class Arr{
+public:
+    Arr(int n){
+        data =new int[n];
+    }
+    ~Arr(){
+        delete []data;
+    }
+private:
+    int *data;
 };
 ```
