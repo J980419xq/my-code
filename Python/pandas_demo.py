@@ -4,6 +4,7 @@ from operator import index
 import random
 import pandas as pd
 import matplotlib.pyplot as plt
+###pandas和matplotlib处理表格数据(excel)pandas使用apply()处理python代码
 font = {'family' : 'SimHei',
         'weight' : 'bold',
         'size'   : '10'}

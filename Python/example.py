@@ -17,7 +17,10 @@ hash={"jxq":1,"yyh":2}
 lst = list( hash.items() )          #[('jxq', 1), ('yyh', 2)]
 str1=r'123\n'+'\\'
 g=[lambda a:a*2,lambda b:b*3]
-str1 = "www.runoob.com"
- 
-print(str1.partition("com"))
+s={i for i in range(10)}
+tup=(10,12)
+print(tup)
+s.update(tup)
+print(s)
+
 
