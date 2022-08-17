@@ -27,7 +27,7 @@ all(iterable)   #判断序列中的所有元素是否都为true(不为0、''、F
 any(iterable)   #判断序列中的所有元素是否都为false,如果是返回false,否则有一个为True则返回True
 eval(expression【,globals【,locals】】)   #globals:全局命名空间,必须是字典对象 locals:局部命名空间,任何映射对象 执行一个字符串表达式
     eval('pow(2,2)')   #返回表达式计算结果,此处为4(int)
-sorted(iterable【,key=op,reverse=False】)   #op:一元函数用于序列的每一个元素上 对op返回的结果进行排序,返回一个新序列 reverse:默认为False(升序)
+sorted(iterable【,key=op,reverse=False】)   #op:一元函数用于序列的每一个元素上 对op返回的结果进行排序,返回一个新列表 reverse:默认为False(升序)
     sorted({1: 'D', 2: 'B', 3: 'B', 4: 'E', 5: 'A'})   #list.sort()方法只为list定义并且在原list上排序,而sorted()可以接收任何的iterable
 product(*iterables【,repeat】)   #类似于生成器表达式中的嵌套循环,product(A,B)和((x,y) for x in A for y in B)返回结果一样
     product(range(2),repeat=3)   #(0,0,0),(0,0,1),(0,1,0),(0,1,1),(1,0,0),(1,0,1),(1,1,0),(1,1,1)
@@ -95,6 +95,7 @@ dic.clear() len(dic) del dist[key]   #同list 字典的长度为key的个数 添
 dic.pop(key【,default】)   #删除key所对应的值,返回被删除的值,如果key不存在,返回default,如果default也没有指定,触发 KeyError 异常
 dic.popitem()   #删除最末尾的键值对
 dic={key:len(key) for key in ['Google','Runoob','Taobao']} dic={key:value for key,value in zip(lst1,lst2)}   #字典生成式
+dic={key:value for key,value in sorted(dic.items(),key=lambda x:x[0],reverse=True)}   #字典排序
 ```
 
 ## set {} {value1,value2}
@@ -115,7 +116,7 @@ s.pop()   #随机移除一个元素
 python中不可变类型参数类似值传递,可变类型类似引用传递<br>
 函数定义中参数前的`*`表示的是将调用时的多个参数放入元组中,`**`则表示将调用时的关键字参数放入一个字典中<br>
 函数调用中,`*`表示将可迭代对象中的所有元素解包(unpack)变成位置参数,`**`表示将字典扩展为关键字参数<br>
-必需参数、可变参数、关键字参数,另外默认参数必须指向不变对象<br>
+必需参数、可变参数、关键字参数,默认参数必须指向不变对象<br>
 偏函数`functools.partial()`把一个函数的某些参数给固定住(也就是设置默认值),返回一个新的函数<br>
 ```python
 def now(time):

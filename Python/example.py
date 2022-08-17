@@ -5,6 +5,7 @@ from random import choice
 from re import M 
 import string
 from types import coroutine
+from typing import Iterable
 
 
 n=1024
@@ -14,14 +15,7 @@ n=n[-1::-1]                        #[4, 2, 0, 1]
 arr=[3,2,4,5,3]
 arr2=sorted(set(arr))              #arr不变,arr2[2, 3, 4, 5]
 arr.sort(reverse=True)             #arr变,reverse=True降序,默认升序
-parent=list(range(4))              #[0,1,2,3]
-hash={"jxq":1,"yyh":2}
-lst = list( hash.items() )          #[('jxq', 1), ('yyh', 2)]
 str1=r'123\n'+'\\'
-g=[lambda a:a*2,lambda b:b*3]
-s={i for i in range(10)}
-def func(*arags,a,e=5,**kwarags):
-    print(a,arags,e,kwarags.values())
 class MyClass:
     count=0                         #类属性 每个实例都可访问,但实例修改只会创建一个实例属性,统一修改需要使用MyClass.count+=1
     __slots__ = ('name', 'age' ,'__lover') # 用tuple定义允许绑定的属性名称,只对当前类起作用,继承的子类不受限制 
@@ -42,8 +36,7 @@ class MyClass:
         print('私有方法','My lover is {}.'.format(self.__lover))
 myclass=MyClass()
 yyh=MyClass('yyh',22,'jxq')
-
-
+print(range(19)[1])
 
 
 
