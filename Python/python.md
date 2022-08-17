@@ -42,7 +42,7 @@ del obj   #删除一个完整对象
 
 ## list [] 
 ```python
-lst=[1,"a",[2,3]]   list(iterable)   cmp(lst1,lst2)   '''返回-1,0,1'''   len(lst)   max(lst)   min(lst)   
+lst=[1,"a",[2,3]]   list(iterable)'dict只保留key'   cmp(lst1,lst2)   '''返回-1,0,1'''   len(lst)   max(lst)   min(lst)   
 ['Hi!'] * 4   '''['Hi!', 'Hi!', 'Hi!', 'Hi!']'''   lst.reverse()   '''lst反向'''
 lst.index(x【,lo【,hi】】)   #返回第一次匹配x的索引位置,如果没有找到对象则抛出异常
 lst[start【:stop【:step】】]   #step为负数时从后往前切 stop为待切序列后一项同
@@ -78,6 +78,7 @@ print(zlib.decompress(t))  #b'hello world!hello world!hello world!hello world!'
 ## tuple () (1,) 
 ```python
 tuple(iterable)   #将序列转为元组 元组元素不可修改,但可以拼接形成一个新元组 元组中list元素值可变 任意以逗号隔开的无符号对象视为元组 函数返回多值就是返回一个元组
+a,*b,c=[1,2,3,4]   #元组解包 a=1,b=[2,3],c=4 集合可能顺序不同,字典只解key,加上.items()解包成元组
 len(tup) ('Hi!',)*4<=>('Hi!', 'Hi!', 'Hi!', 'Hi!') cmp(tup1,tup2) max(tup) min(tup) (1,2,3)+(4,5,6)   #同list且支持切片
 ```
 
@@ -108,4 +109,87 @@ s1.intersection(s2,s3...)   #交集s1&s2,返回一个新集合,可以是其他it
 s.isdisjoint(s1)   #判断两个集合是否包含相同的元素,没有返回True,否则返回False s.issubset(s1) s是s1的子集 s.issuperset(s1) s是s1的超集
 s.discard(value)   #移除value不存在也不会报错 s.remove(value) value不存在会报错
 s.pop()   #随机移除一个元素
+```
+
+## 函数
+python中不可变类型参数类似值传递,可变类型类似引用传递<br>
+函数定义中参数前的`*`表示的是将调用时的多个参数放入元组中,`**`则表示将调用时的关键字参数放入一个字典中<br>
+函数调用中,`*`表示将可迭代对象中的所有元素解包(unpack)变成位置参数,`**`表示将字典扩展为关键字参数<br>
+必需参数、可变参数、关键字参数,另外默认参数必须指向不变对象<br>
+偏函数`functools.partial()`把一个函数的某些参数给固定住(也就是设置默认值),返回一个新的函数<br>
+```python
+def now(time):
+    def sayName(func):                                  #装饰器输出
+        def inner(name):                                #now: 2016/10/30
+            print('now: %s'% time)                      #I'm Yu
+            print("I'm Yu")                             #Hello,siri
+            return func(name)
+        return inner
+    return sayName
+@now('2016/10/30')
+def sayHi(name):
+    print('Hello,' + name)
+sayHi('siri')
+```
+```python
+def sayName(func):                                     #输出
+    print('name')                                      #age
+    def inner():                                       #name
+        print("I'm Yu")                                #I'm Yu
+        return func()                                  #i'm 30
+    return inner                                       #Hello, World
+
+def sayAge(func):
+    print('age')
+    def inner():
+        print("i'm 30")
+        return  func()
+    return inner
+
+@sayName
+@sayAge
+def sayHi():
+    print('Hello, World')
+sayHi()
+```
+
+## 类
+```python
+class MyClass:
+    count=0                         #类属性 每个实例都可访问,但实例修改只会创建一个实例属性,统一修改需要使用MyClass.count+=1
+    __slots__ = ('name', 'age' ,'__lover') # 用tuple定义允许绑定的属性名称,只对当前类起作用,继承的子类不受限制 
+    def __init__(self,name='jxq',age=23,lover='yyh'):   #构造方法,类实例化时自动调用
+        self.name=name
+        self.age=age
+        self.__lover=lover   #私有变量,无法从类外部访问 私有方法也以`__`开头 `_`开头不是私有变量,但不要随意访问
+        MyClass.count+=1
+    def fun(self):
+        self.__privateFun()
+    @staticmethod                                        #静态方法,类和对象都能使用
+    def staticFun():
+        print('静态方法',MyClass.count)
+    @classmethod                                         #类方法,类和对象都能使用
+    def classFun(cls):
+        print('类方法',cls.count)
+    def __privateFun(self):                              #私有方法类外部无法使用
+        print('私有方法','My lover is {}'.format(self.__lover))
+```
+
+## 错误和异常
+```python
+try:                                                #执行try子句,无异常发生忽略except子句,发生异常则try子句余下的部分将被忽略
+    fenzi,fenmu=map(int,input().split(" "))
+    ans=fenzi/fenmu
+except Exception as e:                              #执行异常处理
+    print('error as for {}'.format(e))
+else:                                               #try没发生异常时执行
+    print(ans)
+finally:                                            #不管有没有异常都要执行
+    print("now is finished")
+raise Exception('x不能大于5,x的值为:{}'.format(x))   #抛出异常raise [Exception [, args [, traceback]]]
+assert 1==2,'1不等于2'   #断言,表达式为False时抛出异常 assert expression [,arguments]=>raise AssertionError(arguments)
+''' with 语句用于异常处理,封装了 try…except…finally 编码范式,提高了易用性 
+with open('./test_runoob.txt', 'w') as file:
+    ...
+'''
 ```
