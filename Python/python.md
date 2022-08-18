@@ -29,11 +29,8 @@ eval(expression【,globals【,locals】】)   #globals:全局命名空间,必须
     eval('pow(2,2)')   #返回表达式计算结果,此处为4(int)
 sorted(iterable【,key=op,reverse=False】)   #op:一元函数用于序列的每一个元素上 对op返回的结果进行排序,返回一个新列表 reverse:默认为False(升序)
     sorted({1: 'D', 2: 'B', 3: 'B', 4: 'E', 5: 'A'})   #list.sort()方法只为list定义并且在原list上排序,而sorted()可以接收任何的iterable
-product(*iterables【,repeat】)   #类似于生成器表达式中的嵌套循环,product(A,B)和((x,y) for x in A for y in B)返回结果一样
-    product(range(2),repeat=3)   #(0,0,0),(0,0,1),(0,1,0),(0,1,1),(1,0,0),(1,0,1),(1,1,0),(1,1,1)
 bisect.bisect_left(a,x,【lo=0,hi=len(a),key】)   #定位x在有序序列a中的插入点,lo和hi用于指定查找区间,key作用于每个元素,如果x已经存在于a中,那么插入点在已存在元素的左边,返回值是序列下标,bisect_right()<=>bisect()返回的插入点是a中已存在元素x的右侧
 bisect.insort_left(a,x【,lo=0,hi=len(a),key】)   #将x插入有序序列a内,相当于a.insert(bisect.bisect_left(a, x, lo, hi), x)
-choice(iterable)   #返回含有len()的序列的随机项 random.choice(range(100))
 zip(【iterable,...】)   #将可迭代的对象中对应的元素打包成一个个元组,然后返回由这些元组组成的对象,返回长度与最短的序列相同,利用 * 号操作符,可以将元组解压为列表
     zip([1,2,3],[4,5,6,7])   #(1, 4), (2, 5), (3, 6)   *zip([1,2,3],[4,5,6,7]) `*`解压zip为多个序列<=>a,b,c=zip([1,2,3],[4,5,6,7])
 input(【prompt】)   #prompt:提示信息 接受一个标准输入数据,返回为 string 类型 input("input:")
