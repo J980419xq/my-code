@@ -1,5 +1,6 @@
 from audioop import add
 from functools import reduce
+import heapq
 from itertools import count, product, repeat
 from random import choice
 from re import M 
@@ -36,7 +37,9 @@ class MyClass:
         print('私有方法','My lover is {}.'.format(self.__lover))
 myclass=MyClass()
 yyh=MyClass('yyh',22,'jxq')
-print(range(19)[1])
+heapq.heapify(arr)
+lst=heapq.nlargest(3,[6,2,4,3,5,1])
+print(lst)
 
 
 
