@@ -8,6 +8,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <cmath>
 #define pair1 pair<int, int>
 #define pair2 pair<int, pair1>
 using namespace std;

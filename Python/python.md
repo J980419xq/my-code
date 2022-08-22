@@ -7,7 +7,7 @@
 isinstance(isinstance(example,(set,tuple)))   '''类型匹配 返回值bool'''   type(example)   '''既可以返回一个对象的类型'''   dir(example)   '''获得一个对象的所有属性和方法,返回一个包含字符串的list'''
 Hello = type('Hello', (object,), dict(hello=fn))   #创建新类型Hello,1.class的名称2.继承的父类,元组传入3.class的方法名称与函数绑定
 num=ord(c)-ord('a') chr(97)   #互为逆操作
-max(1,2,3)    len(str1)       min(lst)   gcd(1,2【,3,4...】)   sum(iterable【,initial_value】)
+max(1,2,3)    len(str1)       min(lst)   gcd(1,2【,3,4...】)   sum(iterable【,initial_value】) reversed(iterable) '''翻转序列返回一个迭代器'''
 math.ceil(x)   '''求大于等于x的最小整数'''   divmod(a,b)   '''返回一个包含商和余数的元组(a // b, a % b)'''
 str1=r'123\n'+'\\'                   #r|R标识原始字符串,此时'\'不做转义,但'\'不可做结尾,单独另写结尾的'\'
 10_000_000_000==10000000000   '''`==`比较值 `is`比较id'''   '''`**`幂运算符,`//`整除运算符'''   a,b,c=1,2,3   a,b=b,a   a=(1)<=>a=1
@@ -88,7 +88,7 @@ len(tup) ('Hi!',)*4<=>('Hi!', 'Hi!', 'Hi!', 'Hi!') cmp(tup1,tup2) max(tup) min(t
 
 ## dict {} {key1 : value1, key2 : value2 } 
 ```python
-dict(x=5, y=0,key=value) {'x':5,'y':0,key:value}   #key通常唯一,重复的key-value对取最后一次的value 关键字参数创建字典 使用映射来创建字典
+dict(x=5, y=0,key=value) {'x':5,'y':0,key:value}   #key通常唯一,重复的key-value对取最后一次的value 关键字参数创建字典 使用映射来创建字典 会记住元素插入顺序
 dict([('x',5),['y',0],(key,value)]) dict(zip(['x','y',key],[1,2,value]))  #使用二元可迭代对象(元素为长度为2的序列)创建字典 最多两种方式同时使用 且第二种只能是关键字
 dic.fromkeys(iterable【,value】)   #返回一个新字典,以序列中的每个元素做键映射同一value(默认为None) value为浅拷贝,都是同一引用
 dic.get(key【,value】)   #返回指定键的值,不存在时返回value(默认None) key不存在的时候,setdefault()会返回默认值并更新字典添加键值,而get()只返回默认值,并不改变原字典
@@ -122,6 +122,7 @@ python中不可变类型参数类似值传递,可变类型类似引用传递<br>
 函数调用中,`*`表示将可迭代对象中的所有元素解包(unpack)变成位置参数,`**`表示将字典扩展为关键字参数<br>
 必需参数、可变参数、关键字参数,默认参数必须指向不变对象<br>
 偏函数`functools.partial()`把一个函数的某些参数给固定住(也就是设置默认值),返回一个新的函数<br>
+`/`前只能用位置参数 `*`后只能用关键字参数
 ```python
 def now(time):
     def sayName(func):                                  #装饰器输出

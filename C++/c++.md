@@ -4,6 +4,7 @@ $n^2$
 max(max(a,b),c);                             //min({1,2,3})
 floor();ceil();round()                           //向下取整、向上取整、四舍五入
 gcd(int a,int b)                                 //求最大公约数
+pow(a,b)   //返回double a**b
 int mx=*max_element(dp,dp+26)   //*min_element(vec.begin(),vec.end())
 int index = max_element(arr.begin(), arr.begin() + n) - arr.begin();
 move(obj);   //将一个对象转换为另一个对象，左值引用转换为右值引用，可以避免不必要的拷贝操作
@@ -83,7 +84,7 @@ list双向链表   deque双端队列 priority_queue优先队列                 
 ```c++
 unordered_map<strinig,list<pair<unordered_set<string>,int>>> nodes;
 unordered_set<int> un_set;for(int next:un_set);
-vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});
+vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】)
 vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 ```
 
@@ -93,6 +94,7 @@ vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 取出 x 的二进制表示中最低位那个1 `x & -x `              <br>
 检查一个数的二进制表示全为1  `(a & (a + 1)) == 0`       <br>
 奇偶判断 `x&1==0`
+2的幂 `1 << n `
 
 ## 输入输出
 设置输出宽度`cout.width(12)`，保留3位小数`cout<<setprecision(3)<<a`         <br>
@@ -110,6 +112,7 @@ sscanf(log.c_str(), "%d:%[^:]:%d", &idx, type, &timestamp);//{"0:start:0","0:end
 
 ## 类和结构
 ```c++
+TreeNode* node=new TreeNode(val);
 struct student
 {
     string name;
