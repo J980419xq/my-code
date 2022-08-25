@@ -84,7 +84,7 @@ list双向链表   deque双端队列 priority_queue优先队列                 
 ```c++
 unordered_map<strinig,list<pair<unordered_set<string>,int>>> nodes;
 unordered_set<int> un_set;for(int next:un_set);
-vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】)
+vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】);vec.emplace(vec.begin(),0);
 vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 ```
 
