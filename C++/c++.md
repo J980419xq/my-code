@@ -61,14 +61,19 @@ int dp[26]={0};int len=sizeof(dp)/sizeof(int);
 
 ## string
 ```c++
+string s(); string s("hello"); string s(4,'k'); string s1(s,1,3)    //s从1开始长度为3的子串 不支持一个字符型参数的构造函数
+s="hello"; s='k'; s1.assign(s,1,3)
+s.size(); s.length()
 for(char& c:str);int num=c-'a';char c=num+'0';
+s.append(3,'a'); s1.append(s,1,3)   //追加字符(需要添加个数参数)或字符串    s.insert(2,3,'k') //在下标2处添加字符串"kkk"
+s.push_back(); s.pop_back(); //添加|删除字符
 string num = to_string(sum);//数值转字符串 
 str.find(string target,int m,int n);        //从str的m位置开始查找目标str的前n个字符，返回第一个首字母位置 str.find("jxq")!=string::npos;str.rfind()
 string str2[10] = {"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};string a(5,'8');string *str = {"hello", "world"};
 char str[14] = {"0123456789JQK"};char str[10]={'I','','a','m','','h','a','p','p','y'};char *str[] = {"Hello", "C++", "World"};char *str="IloveChina";
-s.substr(i,b);//复制子字符串，从指定位置i开始，指定长度b
+s1=s.substr(i,b);//复制子字符串，从指定位置i开始，指定长度b
+s1.swap(s)
 char * strtok (char * str, const char * delimiters);//将字符串分割成一个个片段,str指向欲分割的字符串(char []型不可是string)，delimiters为分割符(支持多个)
-str.append(3,'a');   //追加字符(需要添加个数参数)或字符串           str.push_back()
 sch[1]=tolower(sch[1]);//转小写
 if(s2[i]>='a'&&s2[i]<='z'){
 	s2[i]+='A'-'a';      //小写转大写
@@ -82,10 +87,9 @@ string转int `stoi(s)`也可以是`atoi(s.c_str())`，转成double、float `stod
 ## stl
 list双向链表   deque双端队列 priority_queue优先队列                           <br>
 ```c++
+priority_queue<int> pq1; pq1.emplace(1); pq1.push(2);   //大顶堆
+priority_queue<int,vector<int>,greater<int>> pq2   //小顶堆
 unordered_map<strinig,list<pair<unordered_set<string>,int>>> nodes;
-unordered_set<int> un_set;for(int next:un_set);
-vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】);vec.emplace(vec.begin(),0);
-vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 //手写哈希
 static constexpr auto tri_hash = [fn = hash<int>()](const tuple<int, int, int>& o) -> size_t {
         auto&& [x, y, z] = o;
@@ -93,6 +97,10 @@ static constexpr auto tri_hash = [fn = hash<int>()](const tuple<int, int, int>& 
     };
 unordered_map<tuple<int, int, int>, pair<TreeNode*, int>, decltype(tri_hash)> seen{0, tri_hash};
 unordered_map<char,vector<int>> hash;for (auto &&[_, arr]: hash)
+unordered_set<int> un_set;for(int next:un_set);
+set<int> qwe;qwe.insert(2);qwe.insert(1);qwe.erase(qwe.begin());     //插入字符后有序，删除的是1
+vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】);vec.emplace(vec.begin(),0);
+vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 ```
 
 ## 位运算
