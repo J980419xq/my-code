@@ -44,8 +44,7 @@ int main()
 	function<int(int)> func = [&](int n) {
 		return n == 1 ? 1 : n + func(n - 1);
 	};
-	int l=-1%4;
-	cout<<l;
+	int l=-1%4;                //负数余数为负数
 	int n=7;
 	set<int> qwe;
 	qwe.insert(2);
@@ -66,6 +65,8 @@ int main()
 	jxq.insert(make_pair("1",2));
 	jxq.insert(make_pair("3",3));
 	jxq.insert(make_pair("3",4));
+	vector<string> field={"123","234"};
+	cout<<field[1][1];
 	/*for(map<string,int>::iterator iter=jxq.begin();iter!=jxq.end();++iter){
 		cout<<iter->first<<" "<<iter->second<<endl;
 	}                         插入有序*/ 
@@ -98,6 +99,8 @@ int main()
 	vector<vector<int>> f(3, vector<int>(3, 2));
 	//cout<<(*(*f.begin()).begin());
 	string str1="asD";
+	str1=str1.append(0,'1');
+	cout<<str1<<endl;
 	transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
 	string str[] = {"hello", "wrd", "this", "find", "gank", "pink", "that", "when", "how", "cpp"};
 	vector<string> strArray(str, str + 10);

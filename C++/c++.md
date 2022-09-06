@@ -68,7 +68,7 @@ string str2[10] = {"ling","yi","er","san","si","wu","liu","qi","ba","jiu"};strin
 char str[14] = {"0123456789JQK"};char str[10]={'I','','a','m','','h','a','p','p','y'};char *str[] = {"Hello", "C++", "World"};char *str="IloveChina";
 s.substr(i,b);//复制子字符串，从指定位置i开始，指定长度b
 char * strtok (char * str, const char * delimiters);//将字符串分割成一个个片段,str指向欲分割的字符串(char []型不可是string)，delimiters为分割符(支持多个)
-str.append('a',3);   //追加字符(需要添加个数参数)或字符串           str.push_back()
+str.append(3,'a');   //追加字符(需要添加个数参数)或字符串           str.push_back()
 sch[1]=tolower(sch[1]);//转小写
 if(s2[i]>='a'&&s2[i]<='z'){
 	s2[i]+='A'-'a';      //小写转大写
@@ -86,6 +86,13 @@ unordered_map<strinig,list<pair<unordered_set<string>,int>>> nodes;
 unordered_set<int> un_set;for(int next:un_set);
 vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】);vec.emplace(vec.begin(),0);
 vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
+//手写哈希
+static constexpr auto tri_hash = [fn = hash<int>()](const tuple<int, int, int>& o) -> size_t {
+        auto&& [x, y, z] = o;
+        return (fn(x) << 24) ^ (fn(y) << 8) ^ fn(z);
+    };
+unordered_map<tuple<int, int, int>, pair<TreeNode*, int>, decltype(tri_hash)> seen{0, tri_hash};
+unordered_map<char,vector<int>> hash;for (auto &&[_, arr]: hash)
 ```
 
 ## 位运算

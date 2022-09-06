@@ -17,3 +17,10 @@ dq.pop() 移去并返回最右侧的元素,如果为空就引发一个IndexError
 dq.rotate(n) 向右循环移动n步,n是负数就向左循环,默认为None等价于reverse() 向右循环移动一步等价于d.appendleft(d.pop()) 向左循环一步等价于d.append(d.popleft())
 deque还支持迭代、封存、len(d)、reversed(d)、copy.copy(d)、copy.deepcopy(d)、in 以及下标引用(d[0])'''
 print(dq)
+
+d=collections.defaultdict(list)   #defaultdict(default_factory)使用default_factory提供的初始值的字典
+'''d[k].append(v)
+d = defaultdict(int)
+def constant_factory(value):
+    return lambda: value
+d = defaultdict(constant_factory('<missing>'))'''
