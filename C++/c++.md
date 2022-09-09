@@ -107,7 +107,7 @@ string转int `stoi(s)`也可以是`atoi(s.c_str())`，转成double、float `stod
 list双向链表   deque双端队列 priority_queue优先队列                           <br>
 ```c++
 priority_queue<int> pq1; pq1.emplace(1); pq1.push(2);   //大顶堆
-priority_queue<int,vector<int>,greater<int>> pq2   //小顶堆
+priority_queue<pair<int>,vector<pair<int>>,greater<pair<int>>> pq2;	pq2.push({0, 1});  //小顶堆
 unordered_map<strinig,list<pair<unordered_set<string>,int>>> nodes;
 //手写哈希
 static constexpr auto tri_hash = [fn = hash<int>()](const tuple<int, int, int>& o) -> size_t {
@@ -118,7 +118,8 @@ unordered_map<tuple<int, int, int>, pair<TreeNode*, int>, decltype(tri_hash)> se
 unordered_map<char,vector<int>> hash;for (auto &&[_, arr]: hash)
 unordered_set<int> un_set;for(int next:un_set);
 set<int> qwe;qwe.insert(2);qwe.insert(1);qwe.erase(qwe.begin());     //插入字符后有序，删除的是1
-vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】);vec.emplace(vec.begin(),0);
+map<string,int> jxq; jxq.insert(make_pair("2",1)); jxq.erase("3")'删除成功返回1，不成功返回0'
+vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】);vec.emplace(vec.begin(),0); 
 vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 ```
 

@@ -13,27 +13,44 @@
 #define pair2 pair<int, pair1>
 using namespace std;
 
+class unionSet{
+private:
+    int *fa,*rank;
+public:
+	unionSet(int n){
+		fa=new int[n];rank=new int[n];
+		for (int i = 1; i <= n; ++i)
+		{
+			fa[i] = i;
+			rank[i] = 1;
+		}
+	}
+	~unionSet(){
+        delete []fa;
+		delete []rank;
+    }
+	int find(int x)
+	{
+		return x == fa[x] ? x : (fa[x] = find(fa[x]));
+	}
+	void merge(int i, int j)
+	{
+		int x = find(i), y = find(j);
+		if (rank[x] <= rank[y])
+			fa[x] = y;
+		else
+			fa[y] = x;
+		if (rank[x] == rank[y] && x != y)
+			rank[y]++;
+	}
+};
+
 template <typename T, typename F>
 T use_f(T v, F f)
 {
 	return f(v);
 }
 
-int selection(string a, string b)
-{
-	int sum = 0;
-	for (char c : a)
-	{
-		for (char s : b)
-		{
-			if (c == s)
-			{
-				sum++;
-			}
-		}
-	}
-	return sum;
-}
 bool compare(vector<int> &a, vector<int> &b)
 {
 	return a[0] - a[1] < b[0] - b[1];;
@@ -41,71 +58,12 @@ bool compare(vector<int> &a, vector<int> &b)
 
 int main()
 {
-	char qwe[]="wwwaas";
-	char * qwer=strtok(qwe,"a");
-	cout<<qwer;
-	cout<<endl;
 	function<int(int)> func = [&](int n) {
-		return n == 1 ? 1 : n + func(n - 1);
+		return n == 1 ? 1 : n + func(n - 1);   //lambda递归
 	};
 	int l=-1%4;                //负数余数为负数
 	int n=7;
-	priority_queue<pair1, vector<pair1>, less<pair1>> pq1;
-	priority_queue<pair2, vector<pair2>, greater<pair2>> pq2;
-	pq1.push({0, 1});
-	pq1.push({0, 2});
-	pq1.push({0, 3});
-	pq2.push({{0}, {1, 2}});
-	map<string,int> jxq;
-	pair1 power={0,4};
-	pq1.push(move(power));
-	jxq.insert(make_pair("2",1));
-	jxq.insert(make_pair("1",2));
-	jxq.insert(make_pair("3",3));
-	jxq.insert(make_pair("3",4));
-	vector<string> field={"123","234"};   //cout<<field[1][1];
-	/*for(map<string,int>::iterator iter=jxq.begin();iter!=jxq.end();++iter){
-		cout<<iter->first<<" "<<iter->second<<endl;
-	}                         插入有序*/ 
-	//cout<<jxq.erase("3");                 //删除成功返回1，不成功返回0
-	/*int n=0;
-	n|=1<<('b'-'a');
-	n|=1<<('c'-'a');
-	cout<<(1<<('c'-'a'))<<endl;*/
-	int b[5] = {1, 3, 6, 7, 2};
-	unordered_set<int> unset(b,b+5);
-	/*for(int x:unset){
-		cout<<x<<" ";
-	}*/
-	vector<vector<int>> d;
-	d.push_back({1,2});
-	d.push_back({1,3});
-	d.push_back({1,1});
-	auto res = lower_bound(b, b + 5, 3) - b;
-	unordered_map<char,int> htable;
-	vector<int> score(b, b + 5);
-	int num=count_if(score.begin(),score.end(),[](int a){return a>4;});
-	unordered_map<int, int> mapp;    //默认值为0
-	n = score.size();
-	for (int i = 0; i < n; ++i)
-	{
-		mapp[score[i]] = i;
-	}
-	vector<int> c(3, 5);
-	vector<string> ans(n, "0");
-	vector<vector<int>> f(3, vector<int>(3, 2));
-	//cout<<(*(*f.begin()).begin());
-	string str1="asD";
-	transform(str1.begin(), str1.end(), str1.begin(), ::tolower);
-	string str[] = {"hello", "wrd", "this", "find", "gank", "pink", "that", "when", "how", "cpp"};
-	vector<string> strArray(str, str + 10);
-	//stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
-	sort(d.begin(),d.end(),compare);
-	for(auto& com:d){
-		cout<<com[1]<<" ";
-	}
-	/*int m = [](int x) { return [](int y) { return y * 2; }(x)+6; }(5);   //lambda表达式
-    std::cout << "m:" << m << std::endl;            //输出m:16
-	std::cout << "n:" << [](int x, int y) { return x + y; }(5, 4) << std::endl;            //输出n:9*/
+	unionSet uset(n);
+	vector<string> field={"123","234"};   //cout<<field[1][1];    
 	return 0;
 }
