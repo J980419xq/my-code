@@ -79,10 +79,29 @@ if(s2[i]>='a'&&s2[i]<='z'){
 	s2[i]+='A'-'a';      //小写转大写
 }
 transform(str1.begin(), str1.end(), str1.begin(), ::toupper);
+vector<string> split(const string &str,char trim){
+    int n=str.size();
+    vector<string> res;
+    int pos=0;
+    while(pos<n){
+        while(pos<n&&str[pos]==trim){
+            pos++;
+        }
+        if(pos<n){
+            int curr=pos;
+            while(pos<n&&str[pos]!=trim){
+                pos++;
+            }
+            res.emplace_back(str.substr(curr,pos-curr));
+        }
+    }
+    return res;
+}
 ```
 string转int `stoi(s)`也可以是`atoi(s.c_str())`，转成double、float `stod() atof()`     <br>
 `isalpha(s3[i])`判断是否为英文字母、`isdigit()`数字 <br>
  stringstream 主要是用在將一個字串分割，先用 clear() 以及 str() 將指定字串設定成一开始的內容，再用 >> 把个別的资料输出 <br>
+ string_view   <br>
 
 ## stl
 list双向链表   deque双端队列 priority_queue优先队列                           <br>
