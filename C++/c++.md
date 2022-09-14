@@ -130,6 +130,11 @@ vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 检查一个数的二进制表示全为1  `(a & (a + 1)) == 0`       <br>
 奇偶判断 `x&1==0` 2的幂 `1 << n `                      <br>
 乘二 `x<<1` 乘二加一`x<<1|1`   除二`x>>1`
+```c++         
+for(int j=0,mask=0;j<n;j++){           //二进制枚举
+    mask|=mat[j]<<j;   
+}
+```
 
 ## 输入输出
 设置输出宽度`cout.width(12)`，保留3位小数`cout<<setprecision(3)<<a`         <br>

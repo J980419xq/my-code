@@ -62,8 +62,7 @@ int main()
 		return n == 1 ? 1 : n + func(n - 1);   //lambda递归
 	};
 	int l=-1%4;                //负数余数为负数
-	int n=7;
-	unionSet uset(n);
-	vector<string> field={"123","234"};   //cout<<field[1][1];    
+	int n=7;unionSet uset(n);  //并查集
+	vector<string> field={"123","234"};   //cout<<field[1][1]; 
 	return 0;
 }
