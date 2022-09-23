@@ -48,6 +48,7 @@ return type：返回类型
 function body：函数体*/
 sort(words.begin(),words.end(),[](const string &a,const string &b){return a.size()==b.size()?a>b:a.size()<b.size();});
 function<void(TreeNode*,int)> dfs = [&](TreeNode* node,int cur) {... dfs(node->left,cur+1);};   //lambda递归型
+function<bool(int,int)> dfs=[&](int s,int p)->bool{...};
 all_of(iter1,iter2,func)    //迭代范围内的每个元素满足指定属性返回true,常与lambda表达式连用
 transform(first1, last1, result, op)//需返回值并将每个操作返回的值存储在以result开头的范围内，op可以是函数指针或函数对象或lambda表达式
 transform(first1, last1, first2, result, op) //使用[first1, last1)范围内的每个元素作为第一个参数调用op,并以first2开头的范围内的每个元素作为第二个参数调用op
@@ -107,7 +108,7 @@ string转int `stoi(s)`也可以是`atoi(s.c_str())`，转成double、float `stod
 list双向链表   deque双端队列 priority_queue优先队列                           <br>
 ```c++
 priority_queue<int> pq1; pq1.emplace(1); pq1.push(2);   //大顶堆
-priority_queue<pair<int>,vector<pair<int>>,greater<pair<int>>> pq2;	pq2.push({0, 1});  //小顶堆
+priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq2;	pq2.push({0, 1});  //小顶堆
 unordered_map<strinig,list<pair<unordered_set<string>,int>>> nodes;
 //手写哈希
 static constexpr auto tri_hash = [fn = hash<int>()](const tuple<int, int, int>& o) -> size_t {
@@ -157,6 +158,7 @@ struct student
 {
     string name;
     int score;
+    student(_name,_score):name(_name),score(_score){}
 };
 class Arr{
 public:
