@@ -28,6 +28,9 @@ nth_element (RandomAccessIterator first,            //默认升序，找到序�
                   Compare comp);                    //自定义compare
 auto it=upper_bound(times.begin(), times.end(), t); //二分查找,序列中大於t的最小值的位置(地址)，减去times.begin()即为序号
 int pos3=lower_bound(num,num+6,7,greater<int>())-num;  //返回数组中第一个小于或等于被查数的值，重载为greater降序序列
+int k = upper_bound(jobs.begin(), jobs.begin() + i - 1, jobs[i - 1][0], [&](int st, const vector<int> &job) -> bool {
+    return st < job[1];
+}) - jobs.begin();
 [int]b=n/100%10;s=n/10%10;g=n%10;                      //百位，十位，个位
 bool isPrime(int n){                              //判断素数
  bool yes=true;
@@ -98,6 +101,7 @@ vector<string> split(const string &str,char trim){
     }
     return res;
 }
+str1.comapre(pos1,cnt1,str2,pos2,cnt2)   //两个串值相同，则函数返回 0；若字符串 S1 按字典顺序要先于 S2，则返回负值；反之，则返回正值
 ```
 string转int `stoi(s)`也可以是`atoi(s.c_str())`，转成double、float `stod() atof()`     <br>
 `isalpha(s3[i])`判断是否为英文字母、`isdigit()`数字 <br>
@@ -158,7 +162,7 @@ struct student
 {
     string name;
     int score;
-    student(_name,_score):name(_name),score(_score){}
+    student(int _name,string _score):name(_name),score(_score){}
 };
 class Arr{
 public:

@@ -5,42 +5,61 @@
 #include <unordered_set>
 #include <iostream>
 using namespace std;
+static int dates[12]={0,31,28,31,30,31,30,31,31,30,31,30};
 class Solution{
 public:
-    vector<int> maxSumOfThreeSubarrays(vector<int>& nums, int k) {
-        int n=nums.size();
-        if(n==(k*3)){
-            return {0,k,2*k};
-        }
-        vector<int> ans;
-        int mmax=0;
-        for(int i=0;i+3*k<=n;i++){
-            int temp=accumulate(nums.begin()+i,nums.begin()+i+k,0);
-            for(int j=i+k;j+2*k<=n;j++){
-                int temp1=temp+accumulate(nums.begin()+j,nums.begin()+j+k,0);
-                for(int l=j+k;l+k<=n;l++){
-                    int cur=temp1+accumulate(nums.begin()+l,nums.begin()+l+k,0);
-                    if(cur>mmax){
-                        ans.clear();
-                        ans.emplace_back(i);
-                        ans.emplace_back(j);
-                        ans.emplace_back(l);
-                        mmax=cur;
-                    }
+    int shortestBridge(vector<vector<int>>& grid) {
+        const int stations[4][2]={{0,-1},{0,1},{-1,0},{1,0}};
+        bool flag=true;
+        int n=grid.size();
+        function<void(int,int,int)> dfs = [&](int i,int j,int k) {
+            grid[i][j]=k;
+            for(auto& station:stations){
+                int x=i+station[0],y=j+station[1];
+                if(x>=0&&x<n&&y>=0&&y<n&&grid[x][y]==1){
+                    dfs(x,y,k);
+                }
+            }
+            
+        };
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(flag&&grid[i][j]==1){
+                    flag=false;
+                    dfs(i,j,2);
+                }
+                else if(grid[i][j]==1){
+                    dfs(i,j,3);
                 }
             }
         }
-        
+        int ans=INT_MAX;
+        function<void(int,int,int)> f = [&](int i,int j,int k) {
+            if(grid[i][j]==3){
+                ans=min(ans,k);
+                return ;
+            }
+            for(auto& station:stations){
+                int x=i+station[0],y=j+station[1];
+                if(x>=0&&x<n&&y>=0&&y<n&&grid[x][y]!=2){
+                    f(x,y,k+1);
+                }
+            }
+            
+        };
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j]==2){
+                    f(i,j,0);
+                }
+            }
+        }
         return ans;
     }
 };
 int main(){
     Solution solution=Solution();
-    vector<int> nums={1,2,1,2,6,7,5,1};
-    vector<int> ans;
-    ans=solution.maxSumOfThreeSubarrays(nums,2);
-    for(int& num:ans){
-        cout<<num<<" ";
-    }
+    int ans=solution.convertTime("04-18");
+    cout<<ans;
     return 0;
 }
