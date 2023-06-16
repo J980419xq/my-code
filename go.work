@@ -1,0 +1,10 @@
+go 1.20
+
+use (
+	./gopher
+	./greetings
+	./model/factory_model
+	./model/state_moel
+	./model/single_model
+	./model/test
+)

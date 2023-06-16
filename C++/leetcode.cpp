@@ -4,6 +4,7 @@
 #include <numeric>
 #include <unordered_set>
 #include <iostream>
+#include <functional>
 using namespace std;
 static int dates[12]={0,31,28,31,30,31,30,31,31,30,31,30};
 class Solution{
@@ -59,7 +60,5 @@ public:
 };
 int main(){
     Solution solution=Solution();
-    int ans=solution.convertTime("04-18");
-    cout<<ans;
     return 0;
 }

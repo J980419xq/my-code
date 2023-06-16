@@ -1,6 +1,26 @@
 $n^2$
+#include<bits/stdc++.h>
+```bash
+g++ hello.cpp -o hello;
+g++ f1.cpp f2.cpp -o myexec
+```
 ## 常见函数
 ```c++
+//基于范围的for循环
+vector<int>nums={2,4,6};
+for(int &x:nums){                      //使用&可修改x
+    x++;
+}                
+for(int x:nums){                       //不使用&，不可修改x
+    cout<<x<<" ";
+}
+for (const auto &row : ia)             // for every element in the outer array 外层循环控制变量必须声明成引用类型
+    for (auto col : row)               // for every element in the inner array
+        cout << col << endl;
+int count,incr;int var = (count=19,  incr=10, count+1);            //逗号表达式,var的值为最右边的表达式的值,此例为20
+int main(int argc, char* argv[]) {}
+void f(void){} atexit(f) //注册程序正常终止时要被调用的函数,最多可以注册32个处理函数，这些处理函数的调用顺序与注册顺序相反，即后注册的函数先被调用。
+static constexpr int mod=1E9+7;     //const int MOD = 1000000007
 max(max(a,b),c);                             //min({1,2,3})
 floor();ceil();round()                           //向下取整、向上取整、四舍五入
 gcd(int a,int b)                                 //求最大公约数
@@ -16,7 +36,7 @@ accumulate(arr.begin(),arr.end(),0,op);  //op是二元函数对象，常为lambd
 count(vec.begin(),vec.end(),8);         //count(a,a+n,7)
 count_if(vec.begin(),vec.end(),[](int a){return a>10;});
 sort(arr,arr+n,greater<int>());//compare默认为less升序,stable_sort(strArray.begin(), strArray.end(), compare); 稳定排序
-bool compare(stu a,stu b){     //自定义compare，常用lambda表达式如sort(costs.begin(), costs.end(), [](vector<int> &a, vector<int> &b){return a[0] - a[1] < b[0] - b[1];}); //差值排序    
+bool compare(stu a,stu b){     //自定义compare，常用lambda表达式如sort(costs.begin(), costs.end(), [](vector<int> &a, vector<int> &b){return a[0] - a[1] < b[0] - b[1];});   
 	if(a.d+a.c!=b.d+b.c) return a.d+a.c>b.d+b.c;
 	else if(a.d!=b.d) return a.d>b.d;
 	else return a.id<b.id;
@@ -43,7 +63,7 @@ int year{2008};year % 400 == 0 || (year % 4 == 0 && year % 100 != 0 )//判断闰
 ListNode* dummy = new ListNode(-1);TreeNode* root = new TreeNode(0);
 /*静态成员函数指针=普通函数指针!=成员函数指针*/
 lambda表达式 [capture list](params list) |mutable| |exception| |-> return type| { function body };
-/*capture list：捕获外部变量列表  [=]表示以值捕获的方式捕获外部变量，[&]表示以引用捕获的方式捕获外部变量
+/*capture list：捕获外部变量列表  [=]表示以值捕获的方式捕获外部变量，[&]表示以引用捕获的方式捕获外部变量 混合捕获[&, c]、[=, &os]
 params list：形参列表
 mutable指示符：用来说用是否可以修改捕获的变量
 exception：异常设定
@@ -56,6 +76,7 @@ all_of(iter1,iter2,func)    //迭代范围内的每个元素满足指定属性�
 transform(first1, last1, result, op)//需返回值并将每个操作返回的值存储在以result开头的范围内，op可以是函数指针或函数对象或lambda表达式
 transform(first1, last1, first2, result, op) //使用[first1, last1)范围内的每个元素作为第一个参数调用op,并以first2开头的范围内的每个元素作为第二个参数调用op
 for_each(first1,last1,op)                    //速度快但要求一个序列，将op应用于[first1, last1)范围内的每个元素，无需返回值
+find_if(words.begin(), words.end(),op);      //对序列中的每个元素调用op，并返回第一个返回true的迭代器。如果不存在，则返回尾迭代器。
 ```
 
 ## 数组
@@ -82,6 +103,7 @@ sch[1]=tolower(sch[1]);//转小写
 if(s2[i]>='a'&&s2[i]<='z'){
 	s2[i]+='A'-'a';      //小写转大写
 }
+'''字符c大小写转换可以使用 `c ^ 32` '''
 transform(str1.begin(), str1.end(), str1.begin(), ::toupper);
 vector<string> split(const string &str,char trim){
     int n=str.size();
@@ -111,26 +133,47 @@ string转int `stoi(s)`也可以是`atoi(s.c_str())`，转成double、float `stod
 ## stl
 list双向链表   deque双端队列 priority_queue优先队列                           <br>
 ```c++
+pair<string,string> p(file,row);
 priority_queue<int> pq1; pq1.emplace(1); pq1.push(2);   //大顶堆
 priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq2;	pq2.push({0, 1});  //小顶堆
 unordered_map<strinig,list<pair<unordered_set<string>,int>>> nodes;
-//手写哈希
+//手写unordered_map
 static constexpr auto tri_hash = [fn = hash<int>()](const tuple<int, int, int>& o) -> size_t {
         auto&& [x, y, z] = o;
         return (fn(x) << 24) ^ (fn(y) << 8) ^ fn(z);
     };
 unordered_map<tuple<int, int, int>, pair<TreeNode*, int>, decltype(tri_hash)> seen{0, tri_hash};
 unordered_map<char,vector<int>> hash;for (auto &&[_, arr]: hash)
-unordered_set<int> un_set;for(int next:un_set);
+unordered_map<string,vector<int>> hash; for(auto &[name,list]:hash)
+unordered_set<int> un_set;for(int next:un_set); {un_set.begin(),un_set.end()}//转为vector
 set<int> qwe;qwe.insert(2);qwe.insert(1);qwe.erase(qwe.begin());     //插入字符后有序，删除的是1
+qwe.insert(s.begin(),s.end());
 map<string,int> jxq; jxq.insert(make_pair("2",1)); jxq.erase("3")'删除成功返回1，不成功返回0'
 vector<int> vec(n,0);vec={0};vec.push_back({i,j})<=>vec.emplace_back(initializer_list<int>{i,j});vec.erase(vec.begin()【,vec.begin()+n】);vec.emplace(vec.begin(),0); 
 vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
+//自定义优先队列compare
+struct Status {
+    int val;
+    ListNode *ptr;
+    bool operator < (const Status &rhs) const {
+        return val > rhs.val;                          //小根堆 priority_queue <Status> q;
+
+    }
+};
+struct cmp {
+    bool operator()(ListNode* a, ListNode* b){
+        return a->val>b->val;                          //小根堆 
+    }
+};
+priority_queue<Ratio,vector<Ratio>,cmp> pq;
 ```
 
 ## 位运算
-检查一个数是否为 2 的幂: `x > 0 and x & (x - 1) == 0`  <br>
-将x最低为的1变为0 `x&(x-1)`                            <br>
+计算二进制1的个数 1) `&2**x(0<=x<32)` 2) `x & (x - 1)`  <br>
+检查一个数是否为 2 的幂: `x > 0 && (x & (x - 1)) == 0`  <br>
+将x最低位的1变为0 `x&(x-1)`   可以判断是否只有一位为1    <br>
+将x的最低位变为0 `x&-1`                                 <br>
+按位异或 `^` 可使特定位置翻转（要反转的那位异或1）       <br>
 取出 x 的二进制表示中最低位那个1 `x & -x `              <br>
 检查一个数的二进制表示全为1  `(a & (a + 1)) == 0`       <br>
 奇偶判断 `x&1==0` 2的幂 `1 << n `                      <br>
@@ -139,11 +182,15 @@ vector<vector<int>> vec2(m,vector<int>(n));vec2={{arr[i-1],arr[i]}};
 for(int j=0,mask=0;j<n;j++){           //二进制枚举
     mask|=mat[j]<<j;   
 }
+改变n位二进制码的一位可以异或` 1<<x (0<=x<n>) `
+二进制表示中包含的1的子集`sub=(sub−1) & x,sub!=0`
 ```
 
 ## 输入输出
-设置输出宽度`cout.width(12)`，保留3位小数`cout<<setprecision(3)<<a`         <br>
-`while(cin.get(c))`遇到正常字符进入while循环，遇到Ctrl z退出while            <br>
+设置输出宽度`cout.width(12)`，保留3位有效数字`cout<<setprecision(3)<<a`         <br>
+`cout<<setiosflags(ios::right)`   设置右对齐  `cout<<resetiosflags(ios::left)`  清除状态左对齐   <br>
+`while(cin.get(c))`遇到正常字符进入while循环，遇到Ctrl z/d退出while            <br>
+`while (getline(cin,str))`读入多行字符串                            <br>
 `cin.getline(name,20)`读取一行字符串，丢弃换行符,输入字符串可以有空格，读到指定数目字符或遇到换行符停止,字符数组`char name[20]`   <br>
 接收含有空格的字符串，采用cin.get(字符数组名，接收字符数目)`cin.get(name,20)`,不再 读取并丢弃换行符，而是将其留在输入队列中，空参数`cin.get()`读取读取一个字符，包括换行符      <br>
 printf输出string类型必须使用`.c_str()`   <br>
@@ -162,7 +209,7 @@ struct student
 {
     string name;
     int score;
-    student(int _name,string _score):name(_name),score(_score){}
+    student(int _name,string _score):name(_name),score(_score){}               //初始化列表
 };
 class Arr{
 public:
@@ -173,6 +220,7 @@ public:
         delete []data;
     }
 private:
-    int *data;
+    int *data;                  //动态数组
 };
 ```
+
