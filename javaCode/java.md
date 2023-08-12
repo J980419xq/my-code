@@ -497,6 +497,29 @@ thread.setName(thread.getName()) thread.start() thread.setPriority(thread.getPri
 Thread.currentThread() Thread.sleep(long time) Thread.yield() Thread.join()
 ```
 
+## 网络编程
+```java
+// InetAddress IP类 子类 Inet4Address Inet6Addesss
+static InetAddress getByName(String host) //构造方法私有，需要使用静态方法获取主机ip，
+String getHostName() String getHostAddress()
+// UDP
+DatagramSocket ds = new DatagramSocket();  //创建socket，空参构造使绑定随机端口
+DatagramPacket dp = new DatagramPacket(byte[] buf, int offset, int length, InetAddress address, int port) //UDP数据报
+ds.send(dp) ds.close()
+ds.receive(dp) dp.getData() dp.getLength() dp.getAddress() dp.getPort() ds.close()
+MulticastSocket ms = new MulticastSocket(int port) //组播socket
+InetAddress address = InetAddress.getByname("224.0.0.1");
+ms.joinGroup(address)    //将本机加入224.0.0.1组播中
+// TCP
+Socket socket = new Socket(String host, int port) //客户端，需要指定服务端host，连接失败报错
+OutputStream os = socket.getOutputStream();
+os.write(byte[] buf)
+ServeSocket ss = new ServeSocket(int port);//服务端
+Socket socket = ss.accept();
+InputStream is = socket.getInputStream();
+is.read()
+```
+
 ## Guava
 ```java
 //可变集合
