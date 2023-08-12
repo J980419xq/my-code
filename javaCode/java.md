@@ -4,8 +4,8 @@ alt+enter 快速修复
 shift+F10 运行代码， shift+F9 debug代码，ctrl+F8 设置断点    
 psvm 快捷键生成 main 函数，sout 输出语句 ctrl+p 提示构造方法属性 ctrl+alt+b 跳转到方法实现处
 ctrl+/ 单行注释， ctrl+shift+/ 多行注释，ctrl+alt+l 自动格式化代码   ctrl+alt+m 自动抽取方法  
-数组名.fori 自动生成数组的索引遍历 ctrl+alt+t 代码包裹 ctrl+n 搜索并打开选择的类 ctrl+w选中一个单词
-ctrl+b 跳转到光标所在的变量、类或方法的定义处 ctrl+f12 打开当前文件的结构视图 ctrl+alt+v 自动生成等式左边
+数组名.fori 自动生成数组的索引遍历 集合.for 自动生成增强for遍历 ctrl+alt+t 代码包裹 ctrl+n 搜索并打开选择的类 ctrl+w选中一个单词
+ctrl+b 跳转到光标所在的变量、类或方法的定义处 ctrl+f12 打开当前文件的结构视图 ctrl+alt+v 自动生成等式左边 ctrl+d 向下复制一行
 alt+insert 自动生成标准Javab类(PTG插件)
 
 ## 基础知识
@@ -14,7 +14,10 @@ System.exit(0);  停止虚拟机的运行
 java中有3种移位运算符，<<带符号左移 >>带符号右移 >>>无符号右移  
 浅拷贝：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。  
 深拷贝：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。
-引用拷贝：引用拷贝就是两个不同的引用指向同一个对象
+引用拷贝：引用拷贝就是两个不同的引用指向同一个对象  
+泛型：1.统一数据类型2.把运行期的问题提前到了编译期，避免强制类型转换出现的异常，在编译阶段确定数据类型  
+不写泛型默认是Object类型，泛型可以在类、方法、接口中定义 <E> 类名后、方法修饰符后、接口名后  
+泛型通配符? 一切类型 ? extends E 可以传递E或者E所有子类类型  ? super E 可以传递E或者E所有父类类型 <? extends E>
 
 ## 关键字
 关键字字母全部小写
@@ -65,12 +68,13 @@ Integer n1 = new Integer(100);Integer n2 = Integer.valueOf(100);Integer n3 = Int
 int i = Integer.parseInt("100");    //100 把字符串解析成一个整数
 //"100",表示为10进制 "2s",表示为36进制 "64",表示为16进制 "144",表示为8进制 "1100100",表示为2进制，返回值都为String
 Integer.toString(100) Integer.toString(100, 36) Integer.toHexString(100) Integer.toOctalString(100) Integer.toBinaryString(100)// 
-Integer.bitCount(i)
-Boolean.TRUE Boolean.FALSE
+Integer.bitCount(i) 
 Integer.MAX_VALUE Integer.MIN_VALUE
+Boolean.TRUE Boolean.FALSE
 Long.SIZE Long.BYTES// 64 (bits),8 (bytes)
+Character.isDigit(char c)
 Number num = new Integer(999); // 向上转型为Number
-float f = num.floatValue(); // 获取float
+float f = num.floatValue(); // 获取float intValue()
 byte x = -1;int ans = Byte.toUnsignedInt(x)  //255 有符号和无符号整型的转换
 ```
 
@@ -110,7 +114,7 @@ Javabean类，描述一类事物的类，不写main方法
 只支持单继承，不支持多继承，但支持多层继承，每一个类都直接或间接地继承Object，子类只能访问父类中非私有地成员  
 可以把多个子类中重复的代码抽取到父类中，子类可以直接调用，减少代码冗余，提高代码的复用性  
 虚方法表：非private、非static、非final，虚方法可以被继承  
-构造方法、成员变量、成员方法  
+构造方法、成员变量、成员方法
 ### 多态
 方法的重写：父类的方法不满足子类现在的需求时，需要进行方法重写 @Override ，覆盖虚方法表中的方法
 重写方法的名称、形参列表必须与父类一致，访问权限子类必须大于等于父类，抛出的异常类子类必须小于等于父类，返回值类型子类必须小于等于父类，只有被添加到虚方法表中的方法才能被重写
@@ -123,11 +127,12 @@ Javabean类，描述一类事物的类，不写main方法
 创建对象的时候，由虚拟机自动调用，给成员变量进行初始化  
 方法名与类名相同，没有返回值类型但不能用void声明，无参构造和带参构造，没有定义构造方法，系统将给出一个默认的无参构造，如果定义了任意的构造方法，系统将不再提供默认的无参构造  
 修饰符 类名(参数) {方法体;}  
-支持重载，但不能重写
+支持重载，但不能重写，不会被继承，想要使用父类的构造方法需要使用super关键字
 ### 代码块
 局部代码块 变量的作用域，提前结束变量的生命周期
 构造代码块 在成员变量位置处的代码块，抽取构造方法中的重复部分，在变量创建前执行
 静态代码块 static{}，在构造代码块前加static关键字，随着类的加载而加载，并且只执行一次 数据初始化
+同步代码块 synchronized(obj) {} 把操作共享数据的代码锁起来，锁对象obj一定是要唯一的，使用static修饰或使用当前类的字节码文件对象
 ### 抽象类
 抽取共性时，无法确定方法体，就把方法定义为抽象的，强制让子类按照某种格式重写
 抽象方法：public abstract 返回值类型 方法名(参数列表);  
@@ -143,7 +148,7 @@ public interface 接口名 {}    public class 类名 implements 接口名 {}
 接口中的成员变量只能是常量，默认修饰符public static final，没有构造方法  
 接口中除了定义抽象方法，允许定义默认方法，使用default修饰：public default 返回值类型 方法名(参数列表) {}，以及静态方法：public static 返回值类型 方法名(参数列表) {} ，接口中的静态方法只能通过接口名调用，不能通过类和对象调用，私有方法，普通私有方法给默认方法服务和私有静态方法给静态方法服务，接口中的方法默认都是public访问修饰符
 ### 内部类
-在一个类的里面再定义一个类，内部类表示的事物是外部类的一部分，单独出现没有任何意义
+在一个类的里面再定义一个类，内部类表示的事物是外部类的一部分，依赖外部类而存在，单独出现没有任何意义，而且又是一个独立的个体  
 内部类可以直接访问外部类的成员，包括私有，外部类要访问内部类的成员，必须创建对象
 成员内部类：写在成员位置的，属于外部类的成员，可以被修饰符所修饰，调用外部类的成员需要使用 外部类名.this.成员
 静态内部类：使用static修饰的成员内部类，只能访问外部类中的静态变量和静态方法，如果想要访问非静态的需要创建对象
@@ -158,7 +163,7 @@ String name = new String();                       //构造方法 String(String)�
 String str = String.valueOf(obj)                  //obj.toString()
 s1 == s2                    //基本数据类型比较的是值，引用数据类型比较的是地址值，new出来的地址值不一样，== 比较为false
 s1.equals(s2) s1.equalsIgnoreCase(s2)  //比较字符串对象的内容是否相等，重写了Object的equals方法
-s.length() s.charAt(i) s.substring(l, r) s.replace(old, new) s.startWith(str) s.repeat(3) 
+s.length() s.charAt(i) s.substring(l, r) s.replace(old, new) s.startWith(str) s.repeat(3) s.compareTo(s2)
 String s1 = s.intern() //将指定的字符串对象引用保存在字符串常量池中，并返回该引用  
 char[] arr = str.toCharArray(); byte[] byteArray = str.getBytes(); String[] strArray = str.split("");
 StringBuilder sb = new StringBuilder()     //StringBuilder内容可变，StringBuilder(str) 扩容：默认容量16，新容量=老容量*2+2，如果不够则为目标容量，非线程安全
@@ -171,41 +176,73 @@ StringBuffer sb = new StringBuffer();sb.append("a".repeat(n - 1)).append("b").to
 ## 集合
 集合不能直接存基本数据类型，需要存相应的包装类，自动扩容 
 ```java
-import java.util.ArrayList;
-ArrayList<String> list = new ArrayList<String>();                      //ArrayList<Integer> list = new ArrayList<>();
+Collection List Set ArrayList LinkedList Vector HashSet TreeSet LinkedHashSet           //单列集合
+add(E e) clear() remove(E e) contains(Object obj) isEmpty() size() addAll(Collection<? extends E> c) removeAll(Collection<?> c) //contains底层依赖equals判断是否存在
+toArray(T[] a)   //将集合转成对应类型的数组
+Collection<String> coll = new ArrayList<>();
+Iterator<String> it = coll.iterator(); while(it.hashNext()){sout(it.next());}//迭代器遍历时不能用集合的方法进行增删，hasNext判断当前位置是否有元素 next获取当前元素并移动指针
+it.remove()          //迭代器遍历时可以用来进行删除  迭代器是在集合底层创建了一个内部类对象，遍历时会校验集合变化的次数modCount
+for(String s:coll){sout(s);}            //增强for遍历，单列集合或数组 修改增强for中的变量不会改变集合中原本的数据
+coll.forEach(new Consumer<String>(){               //forEach 匿名内部类或者Lamnbda表达式进行遍历 底层使用普通for进行遍历
+    @override                                      //coll.forEach(s -> sout(s));
+    public void accept(String s){
+        sout(s);
+    }
+});
+//List接口 存取元素有序、可重复、有索引
 List<Integer> list = new ArrayList<Integer>();
-list.add(e) list.remove(e) list.remove(i) list.set(i, e) list.get(i) list.size() 
-
-PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> a[2] - b[2]); //小根堆，默认也是小根堆
-pq.add(e);pq.offer(new int[]{0, i, f[0] + g[i]}); pq.isEmpty(); pq.poll();pq.peek();
-
+list.remove(i) list.set(i, e) list.get(i)  list.add(i, e) for(int i = 0; i < list.size(); i++) {sout(list.get(i));} //list可以使用索引增删改查及遍历 set会返回被修改的元素
+ListIterator<String> it = list.listIterator(); it.add(str)     //列表迭代器，增加了add方法以及反向遍历
+ArrayList<String> al = new ArrayList<>();         //Object[]数组，空参创建时底层会创建一个长度为0的数组，添加第一个元素时创建一个长度为10的新数组，存满时扩容1.5倍   
+al.addAll(list1)  //一次性添加多个元素时，1.5倍放不下，以实际长度为准
+LinkedList<String> ll = new LinkedList<>();        //双向链表 内部有一个Node内部类
+addFirst(E e) addLast(E e) getFirst() getLast() removeFirst() removeLast()  //实现了双端队列接口
+Vector                                               //Object[]数组 相比ArrayList线程安全，已被淘汰
+//Queue接口
+Queue<int[]> q = new ArrayDeque<>();
+q.offer(new int[]{i, j}) q.poll() q.peek() // 与add(E e) remove() element()区别在于不返回异常而是返回特殊值
+ArrayQueue<int[]> dq = new ArrayDeque<>();                                 //双端队列  Object[]数组+双指针
+offerFirst(E e) offerLast(E e) pollFirst() pollLast() peekFirst() peekLast() push() pop()     //同样可以模拟栈
+PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> a[2] - b[2]); //小根堆，默认也是小根堆 Object[]数组实现二叉堆
+//Set接口 存取元素无序、不重复、无索引
+Set<String> set = new HashSet<>();
+HashSet<String> hs = new HashSet<>();           //无序、不重复、无索引 哈希表（数组+链表+红黑树）装载因子大于0.75时数组两倍扩容、链表长度超过8且数组长度大于等于64转换为红黑树
+LinkedHashSet<String> lhs = new LinkedHashSet<>();      //存取有序、不重复、无索引 通过双向链表记录元素存储的顺序
+TreeSet<String> ts = new TreeSet<>();                  //可排序、不重复、无索引 红黑树 默认从小到大排序 自定义对象1.实现Comparable接口2.传递Comparator比较器对象，优先选1
+//双列集合
 Map HashMap TreeMap LinkedHashMap Entry
 Map<String, String> map = new HashMap<>(); Map<List<Integer>, Integer> cnt = new HashMap<>();
 put(key, value) get(key) remove(key) clear() containsKey(key) containsValue(value) isEmpty() size()//put会返回覆盖的值不存在则为null
+map.computeIfAbsent(k, k -> new PriorityQueue<>()).offer(1);     //返回value对象的引用，如果key不存在则会创建一个默认value与key进行关联
 merge(key, value, remappingFunction)     //map.merge(k, 1, Integer::sum)
 Set<String> keys = map.KeySet()    //获取所有的键并放到Set中，通过map.get(key)遍历
 for(String key: keys){System.out.println(key + "=" + map.get(key));}
 Set<Map.Entry<String,String>> entries = map.entrySet()    //获取键值对对象的Set
 for(Map.Entry<String,String> entry: entries){System.out.println(entry.getKey() + "=" + entry.getValue());}
 map.forEach((key, value)-> System.out.println(key + "=" + value));
-'''HashMap 键无序、不重复、无索引，哈希表，利用键计算哈希值，链表长度超过8且数组长度大于等于64转为红黑树，键位置如果存储的是自定义对象，需要重写hashCode和equals方法 '''
-HashMap<String,String> hm = new HashMap<>();
+Iterator<Map.Entry<Integer, String>> iterator = map.entrySet().iterator();
+'''HashMap 键无序、不重复、无索引，哈希表，利用键计算哈希值，键位置如果存储的是自定义对象，需要重写hashCode和equals方法 '''
+HashMap<String,String> hm = new HashMap<>();  //默认初始化大小为 16。装载因子大于0.75时数组两倍扩容、链表长度超过8且数组长度大于等于64将链表转换为红黑树
 '''LinkedHashMap 键有序（存储和取出的元素顺序一致）、不重复、无索引，底层数据结构依然是哈希表，只是每个键值对元素又额外多了一个双链表机制记录存储的顺序'''
 LinkedHashMap<String, Integer> lhm = new LinkedHashMap<>();
-'''TreeMap 红黑树结构，键不重复、无索引、可排序，默认按照键从小到大排序，也可以自定义键的排序规则：1.实现Comparable接口指定比较规则；2.传递Comparator比较器对象指定比较规则（第一种无法满足要求时，使用第二种），键是自定义对象时需要实现Comparable接口compareTo方法'''
+'''TreeMap 红黑树结构，键不重复、无索引、可排序，默认按照键从小到大排序，也可以自定义键的排序规则：1.实现Comparable接口compareTo方法；2.传递Comparator比较器对象指定compare规则（第一种无法满足要求时，使用第二种）'''
 TreeMap<Integer, String> tm = new TreeMap<>();
-TreeMap<Integer, String> tm = new TreeMap<>(new Comparator<Integer>{
+TreeMap<Integer, String> tm = new TreeMap<>(new Comparator<Integer>{               //new TreeMap<>((o1, o2) -> o1 - o2);
     @Override
     public int compare(Integer o1, Integer o2){
-        //o1 当前要添加的元素 o2 已经在红黑树中的元素
-        return o2 - o1;               //降序
+        //o1 当前要添加的元素 o2 已经在红黑树中的元素 compareTo方法中this是o1，参数o是o2
+        return o2 - o1;               //降序     返回值小于0 o1存左边 等于0 不存 大于0 存右边
     }
 });
-
 //of(E... elements) Set、Map类似，set中元素需要保证唯一性，map的键不能重复，且不可传递超过10个键值对
 List<String> list = List.of("asd", "zxc", "qwe")   //不可变集合、
 Map<Object, Object> map = Map.ofEntries(hm.entrySet().toArray(new Map.Entry[0])); //不可变map
 Map<String, String> map = Map.copyOf(hm)  //jdk>=10，不可变map
+//并发集合类
+ConcurrentHashMap
+CopyOnWriteArrayList
+ArrayBlockingQueue            //有界，需要指定容量
+LinkedBlockingQueue           //无界
 ```
 
 ## Scanner
@@ -227,6 +264,7 @@ int num = r.nextInt(100) + 1;     // bound:100 0-99
 ```java
 abs(int a) ceil(double a) floor(double a) round(float a) max(int a, int b) min(int a, int b) pow(double a, double b) random()
 sqrt(double a) cbrt(double a)
+
 ```
 
 ## System 
@@ -240,8 +278,10 @@ getRuntime() exit(int status) availableProcessors() maxMemory() totalMemory() fr
 ```
 
 ## Object
+所有类的父类
 ```java
-String toString() 返回对象的字符串表现形式 boolean equals(Object obj) 比较两个对象是否相等 int hashCode() 返回对象的哈希码
+//自定义javabean最好重写equals和hashCode方法 Obeject的equals和hashCode默认用地址值进行计算，推荐根据对象属性值进行重写，发生哈希碰撞时使用equals进行比较是否相等
+String toString() 返回对象的字符串表现形式 boolean equals(Object obj) 比较两个对象是否相等 int hashCode() 返回对象的哈希码   
 Object clone() 对象克隆，首先需要重写Object中的clone()方法，让Javabean类实现Cloneable接口，创建源对象并调用clone，浅拷贝，使用第三方gson可以深拷贝
 Class<?> getClass() 返回当前运行对象的Class对象 void notify() void notifyAll() 唤醒线程 wait()暂停线程的执行 finalize() 对象被回收时触发的操作
 ```
@@ -269,14 +309,14 @@ add(bd) subtract(bd) multiply(bd) divide(bd) divide(bd, 精确几位，舍入模
 compareTo(bd) setScale(3,RoundingMode.HALF_DOWN) equals(bd)  //equals会比较精度，而compareTo不会，推荐使用compareTo
 ```
 
-## Arrays
+## Arrays  数组Array的工具类
 ```java 
 toString(arr)      //把数组拼接成一个字符串
 binarySearch(arr, num)    //数组元素必须是升序的，查找元素存在返回真实索引，不存在则返回-插入点-1
-copyOf(arr, length)          //部分拷贝、完全拷贝、补上默认值
-copyOfRange(arr, start, end)     //指定范围，包头不包尾
+copyOf(arr, length) copyOfRange(arr, start, end)    //部分拷贝、完全拷贝、补上默认值    指定范围，包头不包尾
+Arrays.asList(T... a)     //将数组转成对应类型的List，不能是基本类型可以是二维的基本数据类型数组，且返回的list不能使用修改list的add/remove/clear方法 List list = new ArrayList<>(Arrays.asList("a", "b", "c"))
 fill(arr, num)            //填充数组
-sort(Integer[] arr, new Comparator<Integer>(){   //参数一待排数组，参数二排序规则
+sort(Integer[] arr, new Comparator<Integer>(){   //参数一待排数组，参数二排序规则，自定义Comparator只支持引用类型
     @Override
     public int compare(Integer o1, Integer o2){   //o1待排元素，o2有序序列中的元素
         return o1-o2;                             //升序，o2-o1降序
@@ -293,15 +333,15 @@ sort(Integer[] arr, (Integer o1, Integer o2) -> {   //lambda表达式只能简�
 sort(arr, (o1, o2) -> o1-o2)                            
 ```
 
-## Collections 工具类
+## Collections 集合工具类
 ```java
-addAll(Collection<T> c, T... elements) shuffle(List<T> list) sort(List<T> list) sort(List<T> list, Comparator<T> c)
-binarySearch(List<T> list, T key) copy(List<T> dest, List<T> src) fill(List<T> list, T obj) max/min(Collection<T> c)
-swap(List<T> list, int i, int j)
+addAll(Collection<T> c, T... elements) shuffle(List<T> list) sort(List<T> list) sort(List<T> list, Comparator<T> c) reverse(List list) swap(List list, int i , int j) emptyList()
+binarySearch(List<T> list, T key)   max/min(Collection<T> c) frequency(Collection c, Object o) replaceAll(List list, Object oldVal, Object newVal)
+rotate(List list, int distance) fill(List<T> list, T obj) copy(List<T> dest, List<T> src) indexOfSubList(List list, List target) 
 ```
 
 ## Stream
-Stream<T> stream 通常结合Lambda表达式简化集合、数组的操作
+Stream<T> stream 通常结合Lambda表达式简化集合、数组的操作，不可以是基本数据类型，基本数据类型有对应的流如IntStream
 ```java
 list.stream()                           //获得单列集合的Stream流
 hm.keySet().stream()                    //获得双列集合的键的Stream流
@@ -312,16 +352,37 @@ Stream.of("a", "b", "c")                //获得一堆相同类型零散数据�
 list.stream().filter(s -> s < 1>)       //过滤，s是流中的每个元素
 limit(long maxSize) skip(long n) distinct() //获取前几个元素 跳过前几个元素 去重（依赖hashCode和equals方法）
 Stream.concat(Stream a, Stream b)     //合并流
-map(Function<T, R> mapper) //转换流中的数据类型，T流中原本的数据类型，R要转成的数据类型
+map(Function<T, R> mapper) //转换流中的数据类型，T流中原本的数据类型，R要转成的数据类型，不可以是基本数据类型，基本数据类型需要使用mapToXXX
+mapToInt() sorted() boxed() //拆箱 排序 装箱
 //终结方法
 forEach(Consumer<? super T> action)         //遍历
 list.stream().forEach(s -> System.out.println(s));
 long count() //统计
 String[] arr = list.stream().toArray(v -> new String[v]);  //v 流中数据的个数 创建对应类型的数组并返回装着流里面所有数据的数组
 List<String> lst = list.stream().collect(Collectors.toList()) //收集到集合中，Collectors.toSet() 
-list.stream().collect(Collectors.toMap(
+list.stream().collect(Collectors.toMap(                 //value不可为空指针
                     s -> split("-")[0],
-                    s -> Integer.parseInt(s.split("-")[2])));  //收集到map中，需指定键和值的生成规则，两个Function函数式接口，键不能重复
+                    s -> Integer.parseInt(s.split("-")[2]),
+                    (k1, k2) -> k1))  //收集到map中，需指定键和值的生成规则，两个Function函数式接口，第三个参数指定key冲突后的处理
+list.stream().findFirst()      //返回流中第一个值包装后的Optional对象
+```
+
+## Optional
+包装器类 存的值为任意类型，判断值为null时才使用Optional类
+```java
+Optional<String> empty = Optional.empty();    //返回空的Optional对象 
+Optional<String> opt = Optional.of(String str);   //返回非空值Optional对象，参数不可为空
+Optional<String> opt = Optional.ofNullable(name());  //返回特定值的Optional对象，参数为空则返回空的Optional对象
+opt.isPresent()    //判断是否不为空Optional对象
+opt.isEmpty()     //判断是否为空的Optional对象
+opt.isPresent(s -> sout(s));   //如果不为空Optional对象，存的值调用Consumer接口实现的方法
+opt.get()     //返回Optional存的值，如果为null则报异常
+opt.orElse(String default) //返回Optional存的值，如果为null则返回默认值，默认值如果是方法返回值，虽然不一定用到但还是会创建
+opt.orElseGet(() -> "yyh") //返回Optional存的值，如果为null则调用Supplier接口实现的方法，方法可能不会调用比orElse节省成本
+opt.orElseThrow(() -> new Throwable("出错啦"))   //如果值为null会抛出Supplier接口定义的异常
+opt.filter(o -> o.equals("yyh")) //过滤Optional，如果存的值不为null且符合Predicate接口实现的规则返回该Optional，否则返回空Optional对象
+opt.map(o -> Integer.parseInt(o))               //转换Optional值的类型，值调用Function接口的实现方法进行转换，返回新Optional对象
+opt.flatMap()            //与map区别在于Function接口apply方法返回值不一样，直接返回apply的返回值，map会对apply的返回值使用Optional包装
 ```
 
 ## 方法引用
@@ -358,13 +419,27 @@ public class NewNameException extends RuntimeException {               //自定�
 ```
 
 ## 反射
-在运行时分析类以及执行类中方法的能力、动态代理
+在运行时分析类以及执行类中方法的能力、动态代理、idea的代码提示
+反射允许对封装类的字段，方法和构造函数的信息进行编程访问
+作用：1.获取一个类里面的所有信息，获取到了之后，再执行其他业务逻辑；2.结合配置文件，动态的创建对象并调用方法
+动态代理：无侵入式的给代码增加额外的功能，通过代理转移部分对象的功能，对象有什么方法想要被代理，代理就一定要有对应的方法，通过接口实现    
 ```java
-
+Class.forName("全类名") 类名.class 对象.getClass()   //获取Class对象的三种方式
+Class clazz = Class.forName("day2023617.HelloWorld");
+getConstructors() getDeclaredConstructors() getConstructor(Class<?>... parameterTypes) getDeclaredConstructor(Class<?>... parameters)    //获取Class对象的构造方法Constructor，可以通过Constructor获取名字、权限修饰符、形参、构造对象
+Constructor con = clazz.getConstructor(String.class);
+con.getModifiers() con.getParameters() con.newInstance(Object... initargs) con.setAccessible(true)
+getFields() getDeclaredFields() getField(String name) getDeclaredField(String name) //获取Class对象的成员变量Field，获取权限修饰符、名字、成员变量数据类型、对象成员变量记录的值，修改成员变量的值
+Field field = clazz.getFields(name);
+field.getModifiers() field.getName() field.getType() field.get(obj) field.setAccessible() field.set(obj, Object value)
+getMethods() getDeclaredMethods() getMethod(String name, Class<?>... parameterTypes) getDeclaredMethod(String name, Class<?>...parameterTypes) //获取Class对象的成员方法Method，获取修饰符、名字、形参、返回值、方法抛出的异常，运行方法
+Method method = clazz.getDeclaredMethod("setName", String.class) 
+method.getParameters() m.getExceptionTypes() m.invoke(obj, Objectr... args)
+Object obj = Proxy.newProxyInstance(ClassLoader loader, Class<?>[] interfaces, InvocationHandler h);
 ```
 
 ## File
-一个File对象就是一个路径
+一个File对象就是一个文件或者文件夹的路径
 ```java
 File f = new File(String pathname) //创建file对象 File(String parent, String child) File(File parent, String child)
 isDirectory() isFile() exists() 
@@ -373,4 +448,65 @@ createNewFile() mkdir() mkdirs() delete() //创建文件时会返回是否创建
 listFiles() //路径不存在、文件或需要权限才能访问的文件夹时返回null，空文件夹返回长度为0的数组
 listRoots()  //静态方法，列出可用的文件系统根
 list() list(FilenameFilter filter) listFiles(FilenameFilter filter) listFiles(FileFilter filter)
+```
+
+## I/O流
+用于读写文件或者网络中的数据
+流的方向：输入流和输出流
+操作文件类型：字节流（所有类型文件）和字符流（纯文本文件）
+```java
+//InputStream 字节输入流
+FileInputStream fis = new FileInputStream(File f);   //如果文件不存在，直接报错
+fis.read() fis.read(byte[] b)  fis.close()       //一次读一个字节，读数据时返回的是数据在ASCII上对应的数字，读到文件末尾，返回-1，使用char强转
+BufferedInputStream bis =  new BufferedInputStream(new FileInputStream(File f), int size)  //包装了基本字节输入流，增加了缓冲区，默认8192字节数组
+//OutputStream 字节输出流
+FileOutputStream fos = new FileOutputStream(File f, boolean append);  //创建本地文件字节输出流对象，如果文件不存在会创建一个新文件，但需要保证父级路径存在，如果文件存在会清空文件
+fos.write(int b)fos.write(byte[] b, int off, int len) fos.close() //写数据时使用ASCII字符 fos.write(str.getBytes()) 想要换行就写入换行符
+BufferedOutputStream bos =  new BufferedOutputStream(new FileOutputStream(File f), int size)  //包装了基本字节输出流，增加了缓冲区，默认8192字节数组
+//字符流 = 字节流 + 字符集
+//字符输入流 
+FileReader fr = new FileReader(File f); //会关联文件并创建长度为8192字节的数组缓冲区 FileReader(String fileName, Charset charset)指定字符编码
+read() read(char[] buffer, int off, int len)  //默认一次读一个字节，遇到中文会一次读多个字节，返回字符集上的数字，使用char强转，有参read会把读取到的数据存到数组中
+BufferedReader br = new BufferedReader(Reader r)
+br.readLine()              //读取一行数据，如果没有数据可读返回null
+//字符输出流
+FileWriter fw = new FileWriter(File f, boolean append);   //也会创建8192字节数组的缓冲区
+write(int c) write(String str, int off, int len) write(char[] cbuf, int off, int len) flush()
+BufferedWriter bw = new BufferedWriter(Writer w)
+bw.newLine()
+InputStreamReader isr = new InputStreamReader(InputStream is, String charsetName);  //转换流，将字节流转成字符流，可以指定字符编码
+OutputStreamWriter osw = new OutputStreamWriter(OutputStream os, String charsetName);
+ObjectInputStream ois = new ObjectInputStream(InputStream in);   //反序列化流，将文件中的对象读到程序中
+ois.readObject()
+ObjectOutputStream oos = new ObjectOutputStream(OutputStream out);        //序列化流，把对象写到文件中，需要实现序列化接口（无方法，标记型接口），序列化对象注意指定版本号 serialVersioUID
+oos.write(Object obj)
+PrintStream(OutputStream o) PrintStream(String fileName, Charset c)            //字节打印流，只能输出
+write(int b) println(XXX xxx) print(XXX xxx) printf(String format, Object... args)
+PrintWriter(Write w, boolean autoFlush)           //字符打印流，存在缓冲区，开启自动刷新
+ZipInputStream zip = new ZipInputStream(new FileInputStream(File src));    //解压缩流，将压缩包文件作为输入
+ZipEntry entry = zip.getNextEntry();             //获取压缩包中的每一个ZipEntry对象即文件或文件夹
+ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(dest, "a.zip"));  //压缩流
+ZipEntry entry = new ZipEntry(String name);    //创建ZipEntry对象，
+zos.putNextEntry(entry);                    //将ZipEntry对象放入压缩包中
+zos.write(int b)                        //读取文件数据到压缩包中
+```
+
+## Thread
+```java
+thread.setName(thread.getName()) thread.start() thread.setPriority(thread.getPriority()) thread.setDaemon(boolean on)
+Thread.currentThread() Thread.sleep(long time) Thread.yield() Thread.join()
+```
+
+## Guava
+```java
+//可变集合
+List<String> l1 = Lists.newArrayList(anotherListOrCollection);    // from collection
+List<String> l2 = Lists.newArrayList(aStringArray);               // from array
+List<String> l3 = Lists.newArrayList("or", "string", "elements"); // from varargs
+List<String> l4 = Lists.newArrayList();                           //empty list
+Maps.newConcurrentMap()
+Maps.newHashMap()
+//不可变集合
+List<String> il = ImmutableList.of("string", "elements");  // from varargs
+List<String> il = ImmutableList.copyOf(aStringArray);      // from array
 ```

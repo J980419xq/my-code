@@ -6,7 +6,6 @@
 #include <iostream>
 #include <functional>
 using namespace std;
-static int dates[12]={0,31,28,31,30,31,30,31,31,30,31,30};
 class Solution{
 public:
     int shortestBridge(vector<vector<int>>& grid) {
@@ -60,5 +59,7 @@ public:
 };
 int main(){
     Solution solution=Solution();
+    vector<vector<int>> grid({{1, 2}, {2, 3}});
+    cout << solution.shortestBridge(grid) << endl;
     return 0;
 }

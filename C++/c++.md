@@ -168,24 +168,6 @@ struct cmp {
 priority_queue<Ratio,vector<Ratio>,cmp> pq;
 ```
 
-## 位运算
-计算二进制1的个数 1) `&2**x(0<=x<32)` 2) `x & (x - 1)`  <br>
-检查一个数是否为 2 的幂: `x > 0 && (x & (x - 1)) == 0`  <br>
-将x最低位的1变为0 `x&(x-1)`   可以判断是否只有一位为1    <br>
-将x的最低位变为0 `x&-1`                                 <br>
-按位异或 `^` 可使特定位置翻转（要反转的那位异或1）       <br>
-取出 x 的二进制表示中最低位那个1 `x & -x `              <br>
-检查一个数的二进制表示全为1  `(a & (a + 1)) == 0`       <br>
-奇偶判断 `x&1==0` 2的幂 `1 << n `                      <br>
-乘二 `x<<1` 乘二加一`x<<1|1`   除二`x>>1`
-```c++         
-for(int j=0,mask=0;j<n;j++){           //二进制枚举
-    mask|=mat[j]<<j;   
-}
-改变n位二进制码的一位可以异或` 1<<x (0<=x<n>) `
-二进制表示中包含的1的子集`sub=(sub−1) & x,sub!=0`
-```
-
 ## 输入输出
 设置输出宽度`cout.width(12)`，保留3位有效数字`cout<<setprecision(3)<<a`         <br>
 `cout<<setiosflags(ios::right)`   设置右对齐  `cout<<resetiosflags(ios::left)`  清除状态左对齐   <br>
