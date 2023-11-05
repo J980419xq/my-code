@@ -10,7 +10,6 @@ alt+insert 自动生成标准Javab类(PTG插件)
 
 ## 基础知识
 System.exit(0);  停止虚拟机的运行  
-静态工厂方法 创建“新”对象的静态方法，如Interger.ValueOf()  
 java中有3种移位运算符，<<带符号左移 >>带符号右移 >>>无符号右移  
 浅拷贝：浅拷贝会在堆上创建一个新的对象（区别于引用拷贝的一点），不过，如果原对象内部的属性是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也就是说拷贝对象和原对象共用同一个内部对象。  
 深拷贝：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象。
@@ -18,6 +17,7 @@ java中有3种移位运算符，<<带符号左移 >>带符号右移 >>>无符号
 泛型：1.统一数据类型2.把运行期的问题提前到了编译期，避免强制类型转换出现的异常，在编译阶段确定数据类型  
 不写泛型默认是Object类型，泛型可以在类、方法、接口中定义 <E> 类名后、方法修饰符后、接口名后  
 泛型通配符? 一切类型 ? extends E 可以传递E或者E所有子类类型  ? super E 可以传递E或者E所有父类类型 <? extends E>
+%n 平台独立的换行符  
 
 ## 关键字
 关键字字母全部小写
@@ -55,6 +55,7 @@ long 类型的变量在数据值的后面需要加一个L作为后缀，float �
 byte short char 三种类型的数据在数据运算时会自动转换成 int，再进行运算，char会通过 ASCII 转成对应数字进行运算  
 ### 强制转换
 目标数据类型 变量名 = (目标数据类型) 被强转的数据;//可能发生失真  
+final long MOD = (long) 1e9+7;
 if(a instanceof Dog d) 先判断再强转 等价于 if(a instanceof Dog){Dog d = (Dog)a}
 
 ## 包装类
@@ -76,6 +77,7 @@ Character.isDigit(char c)
 Number num = new Integer(999); // 向上转型为Number
 float f = num.floatValue(); // 获取float intValue()
 byte x = -1;int ans = Byte.toUnsignedInt(x)  //255 有符号和无符号整型的转换
+Integer.toBinaryString()
 ```
 
 ## 数组
@@ -86,6 +88,8 @@ int[] array = new int[5];           //动态初始化，由虚拟机给出默认
 int[] arr2 = arr;                  //共享同一个内存空间
 arr.length;for(int i = 0; i < arr.length; i++)     //for(int num:nums)增强for
 数据类型[][] 数组名 = new 数据类型[][] {{}, {}};   //二维数组初始化 数据类型[][] 数组名 = {{}, {}}; 数据类型[][] 数组名 = new 数据类型[m][n]
+List<Integer>[] g = new List[n];
+List<Integer>[] g = new ArrayList[n];
 ```
 
 ## 方法
@@ -140,7 +144,7 @@ Javabean类，描述一类事物的类，不写main方法
 抽象类中不一定有抽象方法，但有抽象方法的类一定是抽象类，抽象类不能实例化，可以有构造方法  
 抽象类的子类要么重写抽象类中的所有抽象方法，要么还是抽象类  
 ### 接口
-一种规则，是对行为的抽象，如果一个接口里面没有抽象方法，则是一个标记性接口  
+一种规则，是对行为的抽象，如果一个接口里面没有抽象方法，则是一个标记性接口，接口中的方法默认就是抽象方法    
 public interface 接口名 {}    public class 类名 implements 接口名 {}
 接口不能实例化，接口和类之间是实现关系，通过implements表示，可以是多实现也可以在实现的同时继承一个类
 接口和接口之间是继承关系，可以单继承，也可以多继承，如果实现可最下面的子接口，那么就需要重写所有的抽象方法
@@ -161,13 +165,18 @@ public interface 接口名 {}    public class 类名 implements 接口名 {}
 String name = "jxq";   //字符串的内容是不会发生改变的，创建后不可更改 直接赋值，字符串常量池，可以复用，==比较为true
 String name = new String();                       //构造方法 String(String)、String(char[])、String(byte[])
 String str = String.valueOf(obj)                  //obj.toString()
+String str = String.format("二 等于 %s", 2);
 s1 == s2                    //基本数据类型比较的是值，引用数据类型比较的是地址值，new出来的地址值不一样，== 比较为false
 s1.equals(s2) s1.equalsIgnoreCase(s2)  //比较字符串对象的内容是否相等，重写了Object的equals方法
-s.length() s.charAt(i) s.substring(l, r) s.replace(old, new) s.startWith(str) s.repeat(3) s.compareTo(s2)
+s.length() s.charAt(i) s.substring(l, r+1) s.replace(old, new) s.startWith(str) s.repeat(3) s.compareTo(s2)
+s.indexOf(String str)
 String s1 = s.intern() //将指定的字符串对象引用保存在字符串常量池中，并返回该引用  
 char[] arr = str.toCharArray(); byte[] byteArray = str.getBytes(); String[] strArray = str.split("");
+str.chars().forEach(ch -> {       // str.chars() 返回IntStream流，包含每个字符的Ascii值，需要使用(char) ch强转成字符
+    System.out.println(ch);
+});
 StringBuilder sb = new StringBuilder()     //StringBuilder内容可变，StringBuilder(str) 扩容：默认容量16，新容量=老容量*2+2，如果不够则为目标容量，非线程安全
-sb.append(任意类型) sb.reverse() sb.length() sb.toString() sb.charAt(0) sb.isEmpty() //链式编程sb.apppend(1).append(2).append(3)
+sb.append(任意类型) sb.reverse() sb.length() sb.toString() sb.charAt(0) sb.isEmpty() sb.insert(int offset, )//链式编程sb.apppend(1).append(2).append(3)
 StringJoiner sj = new StringJoiner(间隔符号)    //StringJoiner sj = new StringJoiner(间隔符号，开始符号，结束符号) 连接字符串
 sj.add(添加内容) sj.length() sj.toString()
 StringBuffer sb = new StringBuffer();sb.append("a".repeat(n - 1)).append("b").toString();  //线程安全
@@ -178,7 +187,7 @@ StringBuffer sb = new StringBuffer();sb.append("a".repeat(n - 1)).append("b").to
 ```java
 Collection List Set ArrayList LinkedList Vector HashSet TreeSet LinkedHashSet           //单列集合
 add(E e) clear() remove(E e) contains(Object obj) isEmpty() size() addAll(Collection<? extends E> c) removeAll(Collection<?> c) //contains底层依赖equals判断是否存在
-toArray(T[] a)   //将集合转成对应类型的数组
+toArray(T[] a)   //将集合转成对应类型的数组 list.stream().mapToInt(Integer::intValue).toArray()
 Collection<String> coll = new ArrayList<>();
 Iterator<String> it = coll.iterator(); while(it.hashNext()){sout(it.next());}//迭代器遍历时不能用集合的方法进行增删，hasNext判断当前位置是否有元素 next获取当前元素并移动指针
 it.remove()          //迭代器遍历时可以用来进行删除  迭代器是在集合底层创建了一个内部类对象，遍历时会校验集合变化的次数modCount
@@ -195,15 +204,16 @@ list.remove(i) list.set(i, e) list.get(i)  list.add(i, e) for(int i = 0; i < lis
 ListIterator<String> it = list.listIterator(); it.add(str)     //列表迭代器，增加了add方法以及反向遍历
 ArrayList<String> al = new ArrayList<>();         //Object[]数组，空参创建时底层会创建一个长度为0的数组，添加第一个元素时创建一个长度为10的新数组，存满时扩容1.5倍   
 al.addAll(list1)  //一次性添加多个元素时，1.5倍放不下，以实际长度为准
-LinkedList<String> ll = new LinkedList<>();        //双向链表 内部有一个Node内部类
+LinkedList<String> ll = new LinkedList<>();        //双向链表 内部有一个Node内部类，同时实现了Queue接口
 addFirst(E e) addLast(E e) getFirst() getLast() removeFirst() removeLast()  //实现了双端队列接口
 Vector                                               //Object[]数组 相比ArrayList线程安全，已被淘汰
 //Queue接口
-Queue<int[]> q = new ArrayDeque<>();
+Queue<int[]> q = new ArrayDeque<>(); // 不允许添加null，如需添加null使用LinkedList
 q.offer(new int[]{i, j}) q.poll() q.peek() // 与add(E e) remove() element()区别在于不返回异常而是返回特殊值
-ArrayQueue<int[]> dq = new ArrayDeque<>();                                 //双端队列  Object[]数组+双指针
+ArrayDeque<int[]> dq = new ArrayDeque<>();                                 //双端队列  Object[]数组+双指针
 offerFirst(E e) offerLast(E e) pollFirst() pollLast() peekFirst() peekLast() push() pop()     //同样可以模拟栈
 PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> a[2] - b[2]); //小根堆，默认也是小根堆 Object[]数组实现二叉堆
+PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder()); //大根堆
 //Set接口 存取元素无序、不重复、无索引
 Set<String> set = new HashSet<>();
 HashSet<String> hs = new HashSet<>();           //无序、不重复、无索引 哈希表（数组+链表+红黑树）装载因子大于0.75时数组两倍扩容、链表长度超过8且数组长度大于等于64转换为红黑树
@@ -213,6 +223,7 @@ TreeSet<String> ts = new TreeSet<>();                  //可排序、不重复�
 Map HashMap TreeMap LinkedHashMap Entry
 Map<String, String> map = new HashMap<>(); Map<List<Integer>, Integer> cnt = new HashMap<>();
 put(key, value) get(key) remove(key) clear() containsKey(key) containsValue(value) isEmpty() size()//put会返回覆盖的值不存在则为null
+putIfAbsent(key, value) computeIfPresent(k, k -> )
 map.computeIfAbsent(k, k -> new PriorityQueue<>()).offer(1);     //返回value对象的引用，如果key不存在则会创建一个默认value与key进行关联
 merge(key, value, remappingFunction)     //map.merge(k, 1, Integer::sum)
 Set<String> keys = map.KeySet()    //获取所有的键并放到Set中，通过map.get(key)遍历
@@ -234,6 +245,7 @@ TreeMap<Integer, String> tm = new TreeMap<>(new Comparator<Integer>{            
         return o2 - o1;               //降序     返回值小于0 o1存左边 等于0 不存 大于0 存右边
     }
 });
+tm.firstKey() tm.pollFirstEntry().getValue()
 //of(E... elements) Set、Map类似，set中元素需要保证唯一性，map的键不能重复，且不可传递超过10个键值对
 List<String> list = List.of("asd", "zxc", "qwe")   //不可变集合、
 Map<Object, Object> map = Map.ofEntries(hm.entrySet().toArray(new Map.Entry[0])); //不可变map
@@ -312,10 +324,11 @@ compareTo(bd) setScale(3,RoundingMode.HALF_DOWN) equals(bd)  //equals会比较�
 ## Arrays  数组Array的工具类
 ```java 
 toString(arr)      //把数组拼接成一个字符串
-binarySearch(arr, num)    //数组元素必须是升序的，查找元素存在返回真实索引，不存在则返回-插入点-1
+binarySearch(arr, num)    //数组元素必须是升序的，查找元素存在返回真实索引，不存在则返回 -插入点-1
 copyOf(arr, length) copyOfRange(arr, start, end)    //部分拷贝、完全拷贝、补上默认值    指定范围，包头不包尾
-Arrays.asList(T... a)     //将数组转成对应类型的List，不能是基本类型可以是二维的基本数据类型数组，且返回的list不能使用修改list的add/remove/clear方法 List list = new ArrayList<>(Arrays.asList("a", "b", "c"))
+asList(T... a)     //将数组转成对应类型的List，不能是基本类型可以是二维的基本数据类型数组，且返回的list不能使用修改list的add/remove/clear方法 List list = new ArrayList<>(Arrays.asList("a", "b", "c"))
 fill(arr, num)            //填充数组
+setAll(g, e -> new ArrayList<>());
 sort(Integer[] arr, new Comparator<Integer>(){   //参数一待排数组，参数二排序规则，自定义Comparator只支持引用类型
     @Override
     public int compare(Integer o1, Integer o2){   //o1待排元素，o2有序序列中的元素
@@ -324,13 +337,14 @@ sort(Integer[] arr, new Comparator<Integer>(){   //参数一待排数组，参�
 })     
 sort(Integer[] arr, (Integer o1, Integer o2) -> {   //lambda表达式只能简化函数式接口的匿名内部类的书写
         return o1-o2;                               //函数式接口，有且仅有一个抽象方法的接口，接口上方可以加@FunctionalInterface
-    }
+    }                                               //lambda表达式可以引用外部变量，但是该变量默认使用final修饰，不能被修改
 )      
 //lambda表达式省略规则
 //1.参数类型省略不写
 //2.如果只有一个参数，参数类型可以省略，同时()可以省略
 //3.如果方法体只有一行，大括号、分号、return可以省略，且需要同时省略
-sort(arr, (o1, o2) -> o1-o2)                            
+sort(arr, (o1, o2) -> o1-o2)    
+swap(Object[], int a, int b)                        
 ```
 
 ## Collections 集合工具类
@@ -365,6 +379,8 @@ list.stream().collect(Collectors.toMap(                 //value不可为空指�
                     s -> Integer.parseInt(s.split("-")[2]),
                     (k1, k2) -> k1))  //收集到map中，需指定键和值的生成规则，两个Function函数式接口，第三个参数指定key冲突后的处理
 list.stream().findFirst()      //返回流中第一个值包装后的Optional对象
+int x = Arrays.stream(nums).min().getAsInt();
+Integer[] indices = IntStream.range(0, m).boxed.toArray(Integer[]::new);
 ```
 
 ## Optional
@@ -393,7 +409,7 @@ opt.flatMap()            //与map区别在于Function接口apply方法返回值�
 引用成员方法  其他类对象::成员方法 this::成员方法 super::成员方法 this和super不能用在静态方法中  
 引用构造方法  类名::new 用于创建对象，抽象方法的返回值应与创建的对象相同  
 使用类名引用成员方法  类名::成员方法 被引用方法的形参应与抽象方法的第二个形参到最后一个形参保持一致，抽象方法的第一个形参表示被引用方法的调用者，决定了可以引用哪些类中的方法  
-引用数组的构造方法 数据类型::new `Integer[] lst = list.stream().toArray(Integer[]::new);`  
+引用数组的构造方法 数据类型[]::new `Integer[] lst = list.stream().toArray(Integer[]::new);`  
 
 ## 异常
 Error：系统级别的错误
@@ -425,6 +441,7 @@ public class NewNameException extends RuntimeException {               //自定�
 动态代理：无侵入式的给代码增加额外的功能，通过代理转移部分对象的功能，对象有什么方法想要被代理，代理就一定要有对应的方法，通过接口实现    
 ```java
 Class.forName("全类名") 类名.class 对象.getClass()   //获取Class对象的三种方式
+ClassLoader.getSystemClassLoader().loadClass("cn.javaguide.TargetObject");//类加载器xxxClassLoader.loadClass()传入类路径获取Class对象
 Class clazz = Class.forName("day2023617.HelloWorld");
 getConstructors() getDeclaredConstructors() getConstructor(Class<?>... parameterTypes) getDeclaredConstructor(Class<?>... parameters)    //获取Class对象的构造方法Constructor，可以通过Constructor获取名字、权限修饰符、形参、构造对象
 Constructor con = clazz.getConstructor(String.class);

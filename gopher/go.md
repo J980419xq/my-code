@@ -1,9 +1,19 @@
 ```go
 import _ "./hello"     //只是引用 hello 包，仅仅调用该包中的 init 函数，无法通过包名调用包中的其余函数
 const mod int = 1e9 + 7                 //声明常量
-sort.Slice(score, func(i, j int) bool { return score[i][k] > score[j][k] })      // i, j是切片索引
+sort.Slice(score, func(i, j int) bool { return score[i][k] > score[j][k] })      // i, j是切片索引，从大到小排
 sort.Ints(coins)                          //从小到大排序 sort.Strings(ans)
 left := sort.SearchInts(nums, target)    //二分，第一个大于等于target的下标
+sort.Search(1e9, func(m int) bool {
+        cnt, n := 0, len(nums)
+        for i := 0; i < n; i++ {
+            if nums[i] <= m {
+                cnt++
+                i++;
+            }
+        }
+        return cnt >= k
+    })
 var dfs func(*TreeNode) string                             //lambda函数声明
 find = func(root *TreeNode) *TreeNode{}
 func swap(x, y string) (string, string) {                  //go函数可以返回多个返回值
@@ -51,7 +61,15 @@ if n, ok := seen[temp]; !ok {}        //map查找
 for node := range repeat             //set遍历 range可用于切片、数组、map、字符串  for i,x:= range numbers
 curSet := map[string]struct{}{s: {}} nextSet[str[:i]+str[i+1:]] = struct{}{}
 delete(countryCapitalMap, "France")  //delete(map,key)
+var prices *redblacktree.Tree 
+prices = redblacktree.NewWithIntComparator()
+times, ok := prices.Get(prePrice)
+prices.Put(prePrice, times.(int)-1)
+prices.Remove(prePrice)
+prices.Right().Key.(int)
+prices.Left().Key.(int)
 
+type PriorityQueue [][]int
 func (pq PriorityQueue) Len() int {
     return len(pq)
 }
@@ -72,8 +90,27 @@ func (pq *PriorityQueue) Pop() interface{} {
     *pq = old[:n-1]
     return item
 }
+pq := PriorityQueue{}
+heap.Push(&pq, t) heap.Pop(&pq) pq.Len()
 
 
+type Heap struct {
+    sort.IntSlice
+}
+func (h Heap) Less(i, j int) bool {
+    return h.IntSlice[i] > h.IntSlice[j]
+}
+func (h *Heap) Push(x interface{}) {
+    h.IntSlice = append(h.IntSlice, x.(int))
+}
+func (h *Heap) Pop() interface{} {
+    a := h.IntSlice
+    x := a[len(a)-1]
+    h.IntSlice = a[:len(a)-1]
+    return x
+}
+h := &heap{}
+heap.Push(h, t) heap.Pop() h.Len() heap.Fix(h, 0)
 ```
 
 ## string byte rune
