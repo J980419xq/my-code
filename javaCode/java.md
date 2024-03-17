@@ -2,10 +2,11 @@
 shift+shift 打开搜索框，全局搜索  
 alt+enter 快速修复  
 shift+F10 运行代码， shift+F9 debug代码，ctrl+F8 设置断点    
-psvm 快捷键生成 main 函数，sout 输出语句 ctrl+p 提示构造方法属性 ctrl+alt+b 跳转到方法实现处
-ctrl+/ 单行注释， ctrl+shift+/ 多行注释，ctrl+alt+l 自动格式化代码   ctrl+alt+m 自动抽取方法  
+psvm 快捷键生成 main 函数，sout 输出语句 ctrl+/ 单行注释  ctrl+shift+/ 多行注释，
+ctrl+p 提示构造方法属性 ctrl+alt+b 跳转到方法实现处 ctrl+alt+l 自动格式化代码   ctrl+alt+m 自动抽取方法  
 数组名.fori 自动生成数组的索引遍历 集合.for 自动生成增强for遍历 ctrl+alt+t 代码包裹 ctrl+n 搜索并打开选择的类 ctrl+w选中一个单词
 ctrl+b 跳转到光标所在的变量、类或方法的定义处 ctrl+f12 打开当前文件的结构视图 ctrl+alt+v 自动生成等式左边 ctrl+d 向下复制一行
+ctrl + alt + -> 向前跳转 ctrl + alt + <- 向后跳转
 alt+insert 自动生成标准Javab类(PTG插件)
 
 ## 基础知识
@@ -78,6 +79,7 @@ Number num = new Integer(999); // 向上转型为Number
 float f = num.floatValue(); // 获取float intValue()
 byte x = -1;int ans = Byte.toUnsignedInt(x)  //255 有符号和无符号整型的转换
 Integer.toBinaryString()
+Character.isDigit(char c)
 ```
 
 ## 数组
@@ -166,6 +168,7 @@ String name = "jxq";   //字符串的内容是不会发生改变的，创建后�
 String name = new String();                       //构造方法 String(String)、String(char[])、String(byte[])
 String str = String.valueOf(obj)                  //obj.toString()
 String str = String.format("二 等于 %s", 2);
+String str = String.join(CharSequence delimiter, Iterable<? extends CharSequence> elements); // String.join("," lists)
 s1 == s2                    //基本数据类型比较的是值，引用数据类型比较的是地址值，new出来的地址值不一样，== 比较为false
 s1.equals(s2) s1.equalsIgnoreCase(s2)  //比较字符串对象的内容是否相等，重写了Object的equals方法
 s.length() s.charAt(i) s.substring(l, r+1) s.replace(old, new) s.startWith(str) s.repeat(3) s.compareTo(s2)
@@ -176,7 +179,7 @@ str.chars().forEach(ch -> {       // str.chars() 返回IntStream流，包含每�
     System.out.println(ch);
 });
 StringBuilder sb = new StringBuilder()     //StringBuilder内容可变，StringBuilder(str) 扩容：默认容量16，新容量=老容量*2+2，如果不够则为目标容量，非线程安全
-sb.append(任意类型) sb.reverse() sb.length() sb.toString() sb.charAt(0) sb.isEmpty() sb.insert(int offset, )//链式编程sb.apppend(1).append(2).append(3)
+sb.append(任意类型) sb.reverse() sb.length() sb.toString() sb.charAt(0) sb.isEmpty() sb.insert(int offset, ) sb.deleteCharAt(int index)//链式编程sb.apppend(1).append(2).append(3)
 StringJoiner sj = new StringJoiner(间隔符号)    //StringJoiner sj = new StringJoiner(间隔符号，开始符号，结束符号) 连接字符串
 sj.add(添加内容) sj.length() sj.toString()
 StringBuffer sb = new StringBuffer();sb.append("a".repeat(n - 1)).append("b").toString();  //线程安全
@@ -214,6 +217,8 @@ ArrayDeque<int[]> dq = new ArrayDeque<>();                                 //双
 offerFirst(E e) offerLast(E e) pollFirst() pollLast() peekFirst() peekLast() push() pop()     //同样可以模拟栈
 PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) -> a[2] - b[2]); //小根堆，默认也是小根堆 Object[]数组实现二叉堆
 PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Comparator.reverseOrder()); //大根堆
+PriorityQueue<Pair<Long, Integer>> pq = new PriorityQueue<>((a, b) -> Long.compare(a.getKey(), b.getKey()));
+//PriorityQueue<Pair<Long, Integer>> pq = new PriorityQueue<>((a, b) -> (int)(a.getKey() - b.getKey()));  
 //Set接口 存取元素无序、不重复、无索引
 Set<String> set = new HashSet<>();
 HashSet<String> hs = new HashSet<>();           //无序、不重复、无索引 哈希表（数组+链表+红黑树）装载因子大于0.75时数组两倍扩容、链表长度超过8且数组长度大于等于64转换为红黑树
@@ -246,7 +251,7 @@ TreeMap<Integer, String> tm = new TreeMap<>(new Comparator<Integer>{            
     }
 });
 tm.firstKey() tm.pollFirstEntry().getValue()
-//of(E... elements) Set、Map类似，set中元素需要保证唯一性，map的键不能重复，且不可传递超过10个键值对
+//of(E... elements) Set、Map类似，set中元素需要保证唯一性，map的键不能重复，且不可传递超过10个键值对 jdk9
 List<String> list = List.of("asd", "zxc", "qwe")   //不可变集合、
 Map<Object, Object> map = Map.ofEntries(hm.entrySet().toArray(new Map.Entry[0])); //不可变map
 Map<String, String> map = Map.copyOf(hm)  //jdk>=10，不可变map
