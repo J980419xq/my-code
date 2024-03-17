@@ -24,8 +24,6 @@ configuration:
     subnet_ciders:
       - 10.0.1.0/24
       - 10.0.2.0/24
-      - 10.0.3.0/24
-      - 10.0.4.0/24
     number_of_security_groups: 2
     routers:
       - name: router1
@@ -33,15 +31,6 @@ configuration:
         subnet-gw:
           - 10.0.1.1
           - 10.0.2.1
-      - name: router2
-        id: ""
-        subnet-gw:
-          - 10.0.3.1
-          - 10.0.4.1
-    gateways:
-      - name: gateway1
-        id: ""
-        ip: 10.1.0.1
     security_groups:
       - name: default
         id: ""
