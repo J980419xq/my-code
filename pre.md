@@ -37,14 +37,11 @@ configuration:
         rules:
           - name: rule1
             id: ""
-            description: ""
             ethertype: ipv4
             direction: ingress
             protocol: tcp
             port_range:
               - any
-            remote_group_id: ""
-            remote_ip_prefix: ""
         apply_to:
           - vmgroup1
           - vmgroup2
