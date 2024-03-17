@@ -24,7 +24,7 @@ configuration:
     subnet_ciders:
       - 10.0.1.0/24
       - 10.0.2.0/24
-    number_of_security_groups: 2
+    number_of_security_groups: 1
     routers:
       - name: router1
         id: ""
@@ -32,11 +32,6 @@ configuration:
           - 10.0.1.1
           - 10.0.2.1
     security_groups:
-      - name: default
-        id: ""
-        rules: []
-        apply_to:
-          - all
       - name: secgroup1
         id: ""
         rules:
