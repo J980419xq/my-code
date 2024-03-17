@@ -11,3 +11,58 @@
 总体上我觉得我的基础还算是比较扎实，学习能力也还可以，这就是我的自我介绍，感谢。
 
 M端负责把餐饮saas各业务研发的产品及服务（智能POS机、会员管理、点餐助手等）通过销售人员上单动作售卖交付给商家，负责整个产品的完整生命周期。
+
+```
+configuration:
+  name: configuration-1
+  id: ""
+  network-config:
+    name: network-config1
+    id: ""
+    number_of_vpcs: 3
+    number_of_subnets_per_vpc: 3
+    subnet_ciders:
+      - 10.0.1.0/24
+      - 10.0.2.0/24
+      - 10.0.3.0/24
+      - 10.0.4.0/24
+    number_of_security_groups: 2
+    routers:
+      - name: router1
+        id: ""
+        subnet-gw:
+          - 10.0.1.1
+          - 10.0.2.1
+      - name: router2
+        id: ""
+        subnet-gw:
+          - 10.0.3.1
+          - 10.0.4.1
+    gateways:
+      - name: gateway1
+        id: ""
+        ip: 10.1.0.1
+    security_groups:
+      - name: default
+        id: ""
+        rules: []
+        apply_to:
+          - all
+      - name: secgroup1
+        id: ""
+        rules:
+          - name: rule1
+            id: ""
+            description: ""
+            ethertype: ipv4
+            direction: ingress
+            protocol: tcp
+            port_range:
+              - any
+            remote_group_id: ""
+            remote_ip_prefix: ""
+        apply_to:
+          - vmgroup1
+          - vmgroup2
+
+```
